@@ -1,9 +1,0 @@
-[
-  {
-    "artifact": "frcJava (in project SummerSwerve-Imported)",
-    "target": "roborio",
-    "debugfile": "frcJava_roborio.debugconfig",
-    "project": "SummerSwerve-Imported",
-    "language": "java"
-  }
-]
