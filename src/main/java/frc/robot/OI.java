@@ -17,17 +17,22 @@ import frc.robot.commands.UnloadCells;
 import frc.robot.commands.LowerIntake;
 import frc.robot.commands.RaiseIntake;
 import frc.robot.commands.SnapToAngle;
+import frc.robot.commands.ClimbArmDown;
+import frc.robot.commands.ClimbArmUp;
+import frc.robot.commands.WinchUp;
 
 /**
  * This class is the glue that binds the controls on the physical operator
  * interface to the commands and command groups that allow control of the robot.
  */
 public class OI {
+  
   Joystick leftJoy = RobotMap.leftJoy;
   Joystick righJoy = RobotMap.rightJoy;
   Joystick tablet = RobotMap.tablet;
 
   public OI(){
+    
     JoystickButton highGoalShoot = new JoystickButton(tablet, 1);
     JoystickButton lowGoalShoot = new JoystickButton(tablet, 2);
     JoystickButton alignWithGoal = new JoystickButton(tablet, 3);
@@ -36,6 +41,9 @@ public class OI {
     JoystickButton loadCells = new JoystickButton(tablet, 6);
     JoystickButton unloadCells = new JoystickButton(tablet, 7);
     JoystickButton snapToAngle = new JoystickButton(tablet, 8);
+    JoystickButton climbArmUp = new JoystickButton(tablet, 9);
+    JoystickButton climbArmDown = new JoystickButton(tablet, 10);
+    JoystickButton winchUp = new JoystickButton(tablet, 11);
     JoystickButton loadCells = new JoystickButton(rightJoy, 1);
     
     highGoalShoot.whileHeld(new HighGoalShoot());
@@ -50,6 +58,11 @@ public class OI {
     unloadCells.whileHeld(UnoadCells());
     
     snapToAngle.whileHeld(new SnapToAngle());
+    
+    climbArmUp.whileHeld(new ClimbArmUp());
+    climbArmDown.whileHeld(new ClimbArmDown());
+    winchUp.whileHeld(new WinchUp());
+  
   }
 
   public Joystick getLeftJoy(){
