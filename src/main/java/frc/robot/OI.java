@@ -11,6 +11,12 @@ import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.buttons.JoystickButton;
 import frc.robot.commands.HighGoalShoot;
 import frc.robot.commands.LowGoalShoot;
+import frc.robot.commands.Align;
+import frc.robot.commands.LoadCells;
+import frc.robot.commands.UnloadCells;
+import frc.robot.commands.LowerIntake;
+import frc.robot.commands.RaiseIntake;
+import frc.robot.commands.SnapToAngle;
 
 /**
  * This class is the glue that binds the controls on the physical operator
@@ -22,16 +28,28 @@ public class OI {
   Joystick tablet = RobotMap.tablet;
 
   public OI(){
-
-    Joystick tablet = RobotMap.tablet;
-
     JoystickButton highGoalShoot = new JoystickButton(tablet, 1);
     JoystickButton lowGoalShoot = new JoystickButton(tablet, 2);
-  
+    JoystickButton alignWithGoal = new JoystickButton(tablet, 3);
+    JoystickButton lowerIntake = new JoystickButton(tablet, 4);
+    JoystickButton raiseIntake = new JoystickButton(tablet, 5);
+    JoystickButton loadCells = new JoystickButton(tablet, 6);
+    JoystickButton unloadCells = new JoystickButton(tablet, 7);
+    JoystickButton snapToAngle = new JoystickButton(tablet, 8);
+    JoystickButton loadCells = new JoystickButton(rightJoy, 1);
+    
     highGoalShoot.whileHeld(new HighGoalShoot());
     lowGoalShoot.whileHeld(new LowGoalShoot());
-  
-
+    
+    alignWithGoal.whenPressed(new Align());
+    
+    lowerIntake.whenPressed(new LowerIntake());
+    raiseIntake.whenPressed(new RaiseIntake());
+    
+    loadCells.whileHeld(LoadCells());
+    unloadCells.whileHeld(UnoadCells());
+    
+    snapToAngle.whileHeld(new SnapToAngle());
   }
 
   public Joystick getLeftJoy(){
