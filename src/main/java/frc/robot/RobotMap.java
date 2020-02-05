@@ -13,8 +13,7 @@ import com.kauailabs.navx.frc.AHRS;
 import edu.wpi.first.wpilibj.Encoder;
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.SPI;
-import edu.wpi.first.wpilibj.Spark;
-import edu.wpi.first.wpilibj.XboxController;
+import edu.wpi.first.wpilibj.Solenoid;
 /**
  * The RobotMap is a mapping from the ports sensors and actuators are wired into
  * to a variable name. This provides flexibility changing wiring, makes checking
@@ -32,21 +31,25 @@ public class RobotMap {
   public static WPI_TalonSRX RRTalonS = new WPI_TalonSRX(7);
   public static VictorSPX RLTalonD = new VictorSPX(0);
   public static WPI_TalonSRX RLTalonS = new WPI_TalonSRX(1);
-  public static Solenoid intakeSolenoidR = new Solenoid(8);
-  public static Solenoid intakeSolenoidL = new Solenoid(9);
-  public static WPI_TalonSRX intakeTalon = new WPI_TalonSRX(10);
-  public static WPI_TalonSRX conveyorTalon = new WPI_TalonSRX(11);
-  
+
   
   //Motor Controllers
-  public static WPI_TalonSRX flyWheelVictor = new WPI_TalonSRX(20);
+  public static VictorSPX flyWheelVictor = new VictorSPX(20);
+  public static WPI_TalonSRX intakeTalon = new WPI_TalonSRX(10);
+  public static WPI_TalonSRX conveyorTalon = new WPI_TalonSRX(11);
+  public static WPI_TalonSRX winchMotor1 = new WPI_TalonSRX(12);
+  public static WPI_TalonSRX winchMotor2 = new WPI_TalonSRX(13); // This one is the inverted one
+  public static VictorSPX climbingArmMotor = new VictorSPX(0); 
 
   //Joysticks
   public static Joystick leftJoy = new Joystick(1);
   public static Joystick rightJoy = new Joystick(2);
   public static Joystick tablet = new Joystick(0);
 
-  // Other Attachments
+  // Other
   public static Encoder driveEncoder = new Encoder(8 , 9);
   public static AHRS navx = new AHRS(SPI.Port.kMXP);
+  public static Solenoid intakeSolenoidR = new Solenoid(8);
+  public static Solenoid intakeSolenoidL = new Solenoid(9);
+
 }
