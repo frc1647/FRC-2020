@@ -40,7 +40,7 @@ public class Robot extends TimedRobot {
   public static SwerveDirective directive = new SwerveDirective();
   public static SwerveMath swerveMath = new SwerveMath(1, 1);
   public static FlyWheel flywheel = new FlyWheel();
-  public static Vision = new Vision();
+  public static Vision vision = new Vision();
   public static Intake intake = new Intake();
   public static Conveyor conveyor = new Conveyor();
   public static ClimbingMech climbingMech = new ClimbingMech();
