@@ -33,15 +33,15 @@ public class ClimbingMech extends Subsystem {
 
   public void winchUp(){
 
-    RobotMap.winchMotor1.set(ControlMode.PercentOutput, 0.60);
-    RobotMap.winchMotor2.set(ControlMode.PercentOutput, -0.60); // This is the reversed motor
+    RobotMap.winchMotor1.set(ControlMode.PercentOutput, 0.80);
+    RobotMap.winchMotor2.set(ControlMode.PercentOutput, 0.80); // This is the reversed motor
 
   }
 
   public void winchDown(){
 
     RobotMap.winchMotor1.set(ControlMode.PercentOutput, -0.60);
-    RobotMap.winchMotor2.set(ControlMode.PercentOutput, 0.60); // This is the reversed motor
+    RobotMap.winchMotor2.set(ControlMode.PercentOutput, -0.60); // This is the reversed motor
 
   }
 
