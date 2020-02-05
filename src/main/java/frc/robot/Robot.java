@@ -19,6 +19,9 @@ import frc.robot.subsystems.Swerve.Swerve;
 import frc.robot.subsystems.Swerve.SwerveDrivetrain;
 import frc.robot.subsystems.Swerve.SwerveMath;
 import frc.robot.subsystems.Swerve.*;
+import frc.robot.subsystems.Vision;
+import frc.robot.subsystems.Conveyor;
+import frc.robot.subsystems.Intake;
 import frc.robot.OI;
 
 import frc.robot.commands.*;
@@ -37,6 +40,9 @@ public class Robot extends TimedRobot {
   public static SwerveDirective directive = new SwerveDirective();
   public static SwerveMath swerveMath = new SwerveMath(1, 1);
   public static FlyWheel flywheel = new FlyWheel();
+  public static Vision = new Vision();
+  public static Intake intake = new Intake();
+  public static Conveyor conveyor = new Conveyor();
   public static String mode;
   
   public static OI oi;
