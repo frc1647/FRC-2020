@@ -28,7 +28,7 @@ import frc.robot.commands.WinchUp;
 public class OI {
   
   Joystick leftJoy = RobotMap.leftJoy;
-  Joystick righJoy = RobotMap.rightJoy;
+  Joystick rightJoy = RobotMap.rightJoy;
   Joystick tablet = RobotMap.tablet;
 
   public OI(){
@@ -40,11 +40,10 @@ public class OI {
     JoystickButton raiseIntake = new JoystickButton(tablet, 5);
     JoystickButton loadCells = new JoystickButton(tablet, 6);
     JoystickButton unloadCells = new JoystickButton(tablet, 7);
-    JoystickButton snapToAngle = new JoystickButton(tablet, 8);
-    JoystickButton climbArmUp = new JoystickButton(tablet, 9);
-    JoystickButton climbArmDown = new JoystickButton(tablet, 10);
-    JoystickButton winchUp = new JoystickButton(tablet, 11);
-    JoystickButton loadCells = new JoystickButton(rightJoy, 1);
+    JoystickButton climbArmUp = new JoystickButton(tablet, 8);
+    JoystickButton climbArmDown = new JoystickButton(tablet, 9);
+    JoystickButton winchUp = new JoystickButton(tablet, 10);
+    JoystickButton snapToAngle = new JoystickButton(rightJoy, 1);
     
     highGoalShoot.whileHeld(new HighGoalShoot());
     lowGoalShoot.whileHeld(new LowGoalShoot());
@@ -54,8 +53,8 @@ public class OI {
     lowerIntake.whenPressed(new LowerIntake());
     raiseIntake.whenPressed(new RaiseIntake());
     
-    loadCells.whileHeld(LoadCells());
-    unloadCells.whileHeld(UnoadCells());
+    loadCells.whileHeld(new LoadCells());
+    unloadCells.whileHeld(new UnoadCells());
     
     snapToAngle.whileHeld(new SnapToAngle());
     
@@ -69,7 +68,7 @@ public class OI {
     return leftJoy;
   }
   public Joystick getRightJoy() {
-    return righJoy;
+    return rightJoy;
   }
   public Joystick getTablet(){
     return tablet;
