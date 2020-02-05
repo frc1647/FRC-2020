@@ -43,6 +43,7 @@ public class Robot extends TimedRobot {
   public static Vision = new Vision();
   public static Intake intake = new Intake();
   public static Conveyor conveyor = new Conveyor();
+  public static ClimbingMech climbingMech = new ClimbingMech();
   public static String mode;
   
   public static OI oi;
