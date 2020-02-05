@@ -14,7 +14,7 @@ import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.Subsystem;
 import frc.robot.subsystems.ExampleSubsystem;
-import frc.robot.subsystems.FlyWheel;
+import frc.robot.subsystems.testShooting;
 import frc.robot.subsystems.Swerve.Swerve;
 import frc.robot.subsystems.Swerve.SwerveDrivetrain;
 import frc.robot.subsystems.Swerve.SwerveMath;
@@ -36,7 +36,8 @@ public class Robot extends TimedRobot {
   public static SwerveDrivetrain drivetrain = new SwerveDrivetrain();
   public static SwerveDirective directive = new SwerveDirective();
   public static SwerveMath swerveMath = new SwerveMath(1, 1);
-  public static FlyWheel flywheel = new FlyWheel();
+  public static SwapCentricMode swapCentricMode = new SwapCentricMode();
+  public static testShooting shooter = new testShooting();
   public static String mode;
   
   public static OI oi;
@@ -66,7 +67,12 @@ public static Subsystem testShooting;
    */
   @Override
   public void robotPeriodic() {
-    
+    if (drivetrain.getModeRobot() == CentricMode.Robot){
+      mode = "Robot";
+    }else{
+      mode = "Field";
+    }
+    SmartDashboard.putString("DriveMode", mode);
   }
 
   /**
@@ -136,6 +142,23 @@ public static Subsystem testShooting;
   @Override
   public void teleopPeriodic() {
     Scheduler.getInstance().run();
+    
+    //double speed = Robot.oi.getLeftJoy().getY();
+    /*//This is to test the flywheel percent output with the XBOX controller
+    double speed = 0;
+    if(Robot.oi.getLeftJoy().getRawButton(1)) {
+      speed = 0.75;
+    } else if (Robot.oi.getLeftJoy().getRawButton(2)) {
+      speed = 0.8;
+    } else if (Robot.oi.getLeftJoy().getRawButton(3)) {
+      speed = 0.9;
+    } else if (Robot.oi.getLeftJoy().getRawButton(4)) {
+      speed = 1.0;
+    } else {
+      speed = 0;
+    }
+    RobotMap.testTalon.set(speed);
+    */
   }
 
   /**
