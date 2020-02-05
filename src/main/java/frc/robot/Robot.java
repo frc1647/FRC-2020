@@ -22,6 +22,7 @@ import frc.robot.subsystems.Swerve.*;
 import frc.robot.subsystems.Vision;
 import frc.robot.subsystems.Conveyor;
 import frc.robot.subsystems.Intake;
+import frc.robot.subsystems.ClimbingMech;
 import frc.robot.OI;
 
 import frc.robot.commands.*;
