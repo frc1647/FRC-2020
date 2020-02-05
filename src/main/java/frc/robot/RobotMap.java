@@ -32,6 +32,11 @@ public class RobotMap {
   public static WPI_TalonSRX RRTalonS = new WPI_TalonSRX(7);
   public static VictorSPX RLTalonD = new VictorSPX(0);
   public static WPI_TalonSRX RLTalonS = new WPI_TalonSRX(1);
+  public static Solenoid intakeSolenoidR = new Solenoid(8);
+  public static Solenoid intakeSolenoidL = new Solenoid(9);
+  public static WPI_TalonSRX intakeTalon = new WPI_TalonSRX(10);
+  public static WPI_TalonSRX conveyorTalon = new WPI_TalonSRX(11);
+  
   
   //Motor Controllers
   public static WPI_TalonSRX flyWheelVictor = new WPI_TalonSRX(20);
