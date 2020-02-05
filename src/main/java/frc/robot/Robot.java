@@ -47,7 +47,6 @@ public class Robot extends TimedRobot {
   public static String mode;
   
   public static OI oi;
-public static Subsystem testShooting;
   Command m_autonomousCommand;
   SendableChooser<Command> m_chooser = new SendableChooser<>();
 
