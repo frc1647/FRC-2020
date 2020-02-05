@@ -54,7 +54,7 @@ public class OI {
     raiseIntake.whenPressed(new RaiseIntake());
     
     loadCells.whileHeld(new LoadCells());
-    unloadCells.whileHeld(new UnoadCells());
+    unloadCells.whileHeld(new UnloadCells());
     
     snapToAngle.whileHeld(new SnapToAngle());
     
