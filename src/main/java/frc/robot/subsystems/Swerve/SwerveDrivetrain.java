@@ -40,7 +40,7 @@ public class SwerveDrivetrain extends Subsystem {
   public static BaseMotorController rlDrive = RobotMap.RLTalonD; //rear left drive
   public static BaseMotorController rlSteer = RobotMap.RLTalonS; //rear left steer
 
-  private final double width = 9.5;
+  private final double width = 10.25; //used to be 9.5
   private final double length = 8.5;
   private final double gearRatio = 59.16666666;
 
