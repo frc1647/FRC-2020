@@ -58,7 +58,7 @@ public class SwerveMath {
     double rra = Math.atan2(a,d)*180/Math.PI;
     double rla = Math.atan2(a,c)*180/Math.PI;
 
-    if(rcw != 0 && fwd == 0 && str == 0){
+    if(rcw != 0 && fwd == 0 && str == 0){ //might need to fix root cause
         fra = Math.atan2(b,c)*180/Math.PI - 90;
         fla = Math.atan2(b,d)*180/Math.PI + 90;
     }
