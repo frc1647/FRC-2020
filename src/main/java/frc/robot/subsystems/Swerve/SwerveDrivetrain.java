@@ -92,7 +92,6 @@ public class SwerveDrivetrain extends Subsystem {
    resetQuadrentureEncoder();
    resetDriveEnc();
 
-
   }
 
   public void initSteerMotor(BaseMotorController steerMotor){
@@ -105,15 +104,15 @@ public class SwerveDrivetrain extends Subsystem {
     steerMotor.configNominalOutputForward(0, 10);
     steerMotor.configNominalOutputReverse(0, 10);
 
-    frontRight.setReverseEncoder(true);
-		frontLeft.setReverseEncoder(true);
-		rearLeft.setReverseEncoder(true);
-		rearRight.setReverseEncoder(true);
+    frontRight.setReverseEncoder(false);
+		frontLeft.setReverseEncoder(false);
+		rearLeft.setReverseEncoder(false);
+		rearRight.setReverseEncoder(false);
 		
-		frontRight.setReverseSteerMotor(true);
-		frontLeft.setReverseSteerMotor(true);
-		rearLeft.setReverseSteerMotor(true);
-		rearRight.setReverseSteerMotor(true);
+		frontRight.setReverseSteerMotor(false);
+		frontLeft.setReverseSteerMotor(false);
+		rearLeft.setReverseSteerMotor(false);
+		rearRight.setReverseSteerMotor(false);
 
     steerMotor.setNeutralMode(NeutralMode.Brake);
 
@@ -129,6 +128,7 @@ public class SwerveDrivetrain extends Subsystem {
   }
 
   public void resetQuadrentureEncoder(){
+    //frSteer.setSelectedSensorPosition(analogFrontRight.getValue()) setting sensor positions to a constant value for starting (doesn't seem to be 0)
     
     frSteer.set(ControlMode.Position, 0);
     flSteer.set(ControlMode.Position, 0);
@@ -151,5 +151,32 @@ public class SwerveDrivetrain extends Subsystem {
   public void stop(){
     swerveDrivetrain.stop();
   }
+
+  public void toggleMode(){
+		Robot.swerveMath.toggleCentricMode(); // was this.SwerveMath....
+	}
 	
+	public void setModeRobot() {
+		Robot.swerveMath.setModeRobot(); // was this.SwerveMath....
+	}
+	
+	public CentricMode getModeRobot() {
+		return Robot.swerveMath.getCentricMode(); // was this.SwerveMath....
+	}
+	
+	public void setModeField() {
+		Robot.swerveMath.setModeField();
+	}
+  /*public Encoder getAnalogInputFrontRight() { // Encoder was digital input
+    return analogFrontRight;
+  }
+  public Encoder getAnalogInputFrontLeft() {
+    return analogFrontLeft;
+  }
+  public Encoder getAnalogInputRearRight() {
+    return analogRearRight;
+  }
+  public Encoder getAnalogInputRearLeft() {
+    return analogRearLeft;
+  } */
 }

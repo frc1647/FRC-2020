@@ -52,15 +52,16 @@ private boolean reverseSteer = false;
     }*/
 
     public void setAngle(double angle){
-        if (reverseSteer){
+        //commented for testing 4048 code
+        /*if (reverseSteer){
             //steerMotor.set(ControlMode.Position, -1 * angle * gearRatio);
             steerMotor.set(ControlMode.Position, angle);
         }
         else{ 
             //steerMotor.set(ControlMode.Position, 1 * angle * gearRatio); 
             steerMotor.set(ControlMode.Position, angle);
-        }
-        //steerMotor.set(ControlMode.Position, (reverseSteer ? -1 : 1) * angle * encTicPerRotate);
+        }*/
+        steerMotor.set(ControlMode.Position, (reverseSteer ? -1 : 1) * angle * encTicPerRotate);
     }
 
     public void setEncoder(int postion){
@@ -79,20 +80,31 @@ private boolean reverseSteer = false;
         int encPosition = getEncPosition();
         angle = convertAngle(angle, encPosition);
         
+        //the following was brought to you by team 4048's code
+        if (shouldReverse(angle, encPosition)) {
+            if(angle < 0){
+                angle += 0.5;
+            } else {
+                angle -= 0.5;
+            }
+            speed *= -1;
+        }
+
         setSpeed(speed);
-        if (speed != 0.0) { setAngle(angle); 
+        if (speed != 0.0) { 
+            setAngle(angle); 
             //System.out.println(angle);
         }
     }
 
     //checks if the wheel is at a spot to reverse to get to desired direction
     //The subsequen \t set and get angles all work towards making sure the wheel will turn the right direction
-    public boolean shouldReverse(double wa, double encoderValue){
-        double ea = SwerveUtil.convertEncoderValue(encoderValue, gearRatio);
+    public boolean shouldReverse(double angle, double encoderValue){
+        double ea = SwerveUtil.convertEncoderValue(encoderValue, encTicPerRotate);
 		
-		if(wa < 0)	wa += 1;
+		if(angle < 0)	angle += 1;
 		
-		double longDiff = Math.abs(wa - ea);
+		double longDiff = Math.abs(angle - ea);
 		
 		double diff = Math.min(longDiff, 1.0-longDiff);
 		
@@ -102,6 +114,9 @@ private boolean reverseSteer = false;
     }
     
     private double convertAngle(double angle, double encoderValue){
+        
+        
+        /*commented out to test stuff
         SmartDashboard.putNumber("convAng inAngle", angle);
         SmartDashboard.putNumber("convAng encValue", encoderValue);
         double encPos = modPos(encoderValue, encTicPerRotate);
@@ -121,9 +136,9 @@ private boolean reverseSteer = false;
         SmartDashboard.putNumber("Output", output);
 
         return output;
-        
+        */
         //original convertAngle code, almost exactly the same as 4048's
-        /*double encPos = encoderValue / encTicPerRotate;
+        double encPos = encoderValue / encTicPerRotate;
         double temp = angle;
         temp += (int)encPos;
 
@@ -133,7 +148,7 @@ private boolean reverseSteer = false;
 
 		if((angle - encPos) < -0.5) temp += 1;
 		
-        return temp;*/
+        return temp;
     }
 
     private double modPos(double in, double m){
@@ -149,12 +164,12 @@ private boolean reverseSteer = false;
     }
     
     public int getEncPosition(){
-        int reverse;// = reverseEncoder ? -1 : 1;
-        if(reverseEncoder){
+        int reverse = reverseEncoder ? -1 : 1;
+        /*if(reverseEncoder){
             reverse = 1; // FIXED SWERVE, -1 TO +1
         }
-        else{ reverse = 1; }
-		return reverse * steerMotor.getSelectedSensorPosition(0); //may be BAD
+        else{ reverse = 1; }*/
+		return reverse * steerMotor.getSelectedSensorPosition(0);
     }
 
     public boolean isReverseEncoder(){

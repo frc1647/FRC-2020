@@ -7,25 +7,11 @@
 
 package frc.robot.subsystems.Swerve;
 
-/**
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
+import frc.robot.commands.Drive;/**
  * Add your docs here.
  */
-public class SwerveUtil {
-    public static double convertEncoderValue(double encoderValue, double gearRatio){
-		double encPos = encoderValue;
-		
-		encPos /= gearRatio; //inputted gearratio is encoder tics per rotate 
-		encPos = encPos % 1;
-		
-		return encPos;
-	}
-	
-	//not used
-	public static double convertAngle(double angle, double gearRatio){
-		double encVal = angle;
-		
-		encVal += gearRatio;
-		
-		return encVal;
-	}
+public enum CentricMode {
+    Robot,
+    Field
 }
