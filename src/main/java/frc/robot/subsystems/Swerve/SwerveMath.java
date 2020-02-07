@@ -8,6 +8,9 @@
 package frc.robot.subsystems.Swerve;
 
 import java.lang.Math;
+
+import edu.wpi.first.wpilibj.shuffleboard.Shuffleboard;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import frc.robot.RobotMap;
 
 /**
@@ -39,6 +42,11 @@ public class SwerveMath {
     double b = str + rcw*(length/diagonal);
     double c = fwd - rcw*(width/diagonal);
     double d = fwd + rcw*(width/diagonal);
+    
+    SmartDashboard.putNumber("math a", a);
+    SmartDashboard.putNumber("math b", b);
+    SmartDashboard.putNumber("math c", c);
+    SmartDashboard.putNumber("math d", d);
 
     double frs = Math.sqrt(Math.pow(b,2)+Math.pow(c,2)); 
     double fls = Math.sqrt(Math.pow(b,2)+Math.pow(d,2));
@@ -49,6 +57,11 @@ public class SwerveMath {
     double fla = Math.atan2(b,d)*180/Math.PI;
     double rra = Math.atan2(a,d)*180/Math.PI;
     double rla = Math.atan2(a,c)*180/Math.PI;
+
+    if(rcw != 0 && fwd == 0 && str == 0){
+        fra = Math.atan2(b,c)*180/Math.PI - 90;
+        fla = Math.atan2(b,d)*180/Math.PI + 90;
+    }
 
     //double temp = (fwd*Math.cos(gyro.getAngle())) + str*Math.sin(gyro.getAngle());
     double max = frs; 

@@ -13,7 +13,7 @@ import com.kauailabs.navx.frc.AHRS;
 import edu.wpi.first.wpilibj.Encoder;
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.SPI;
-import edu.wpi.first.wpilibj.Solenoid;
+//import edu.wpi.first.wpilibj.Solenoid;
 /**
  * The RobotMap is a mapping from the ports sensors and actuators are wired into
  * to a variable name. This provides flexibility changing wiring, makes checking
@@ -46,10 +46,10 @@ public class RobotMap {
   public static Joystick rightJoy = new Joystick(2);
   public static Joystick tablet = new Joystick(0);
 
-  // Other
+  // Others
   public static Encoder driveEncoder = new Encoder(8 , 9);
   public static AHRS navx = new AHRS(SPI.Port.kMXP);
-  public static Solenoid intakeSolenoidR = new Solenoid(8);
-  public static Solenoid intakeSolenoidL = new Solenoid(9);
+  //public static Solenoid intakeSolenoidR = new Solenoid(8);
+  //public static Solenoid intakeSolenoidL = new Solenoid(9);
 
 }
