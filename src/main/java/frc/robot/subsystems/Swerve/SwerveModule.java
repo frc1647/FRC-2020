@@ -11,6 +11,7 @@ import com.ctre.phoenix.motorcontrol.ControlMode;
 import com.ctre.phoenix.motorcontrol.can.BaseMotorController;
 import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
 import com.ctre.phoenix.motorcontrol.can.WPI_VictorSPX;
+import frc.robot.Robot;
 
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
@@ -24,7 +25,6 @@ private double gearRatio;
 
 private BaseMotorController driveMotor;
 private BaseMotorController steerMotor;
-private double encTicPerRotate = 28 *59.16666666;
 
 private boolean reverseEncoder = false;
 private boolean reverseSteer = false;
@@ -35,6 +35,8 @@ private boolean reverseSteer = false;
         steerMotor = steer;
         this.gearRatio = gearRatio;
     }
+
+private double encTicPerRotate = 28 * gearRatio;
 
     public void stop(){
         driveMotor.set(ControlMode.PercentOutput, 0);

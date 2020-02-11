@@ -14,7 +14,6 @@ import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.Subsystem;
 import frc.robot.subsystems.ExampleSubsystem;
-import frc.robot.subsystems.testShooting;
 import frc.robot.subsystems.Swerve.Swerve;
 import frc.robot.subsystems.Swerve.SwerveDrivetrain;
 import frc.robot.subsystems.Swerve.SwerveMath;
@@ -35,11 +34,10 @@ public class Robot extends TimedRobot {
   public static ExampleSubsystem m_subsystem = new ExampleSubsystem();
   public static SwerveDrivetrain drivetrain = new SwerveDrivetrain();
   public static SwerveDirective directive = new SwerveDirective();
-  public static SwerveMath swerveMath = new SwerveMath(1, 1);
+  public static SwerveMath swerveMath = new SwerveMath(drivetrain.getWidth(), drivetrain.getLength());
   public static SwapCentricMode swapCentricMode = new SwapCentricMode();
-  public static testShooting shooter = new testShooting();
   public static String mode;
-  
+
   public static OI oi;
 public static Subsystem testShooting;
   Command m_autonomousCommand;

@@ -22,8 +22,6 @@ import edu.wpi.first.wpilibj.buttons.JoystickButton;
 public class OI {
   Joystick leftJoy = RobotMap.leftJoy;
   Joystick righJoy = RobotMap.rightJoy;
-  XboxController xbox = RobotMap.xboxController;
-  JoystickButton b1 = new JoystickButton(leftJoy, 0);
 
   public OI(){
 
@@ -42,9 +40,7 @@ public class OI {
   public Joystick getRightJoy() {
     return righJoy;
   }
-  public JoystickButton getButton(){
-    return b1;
-  }
+
   /*public JoystickButton getCentricButton(){
     return swapCentricModeButton;
   }*/

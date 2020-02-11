@@ -39,9 +39,11 @@ public class SwerveDrivetrain extends Subsystem {
   public static BaseMotorController rrSteer = RobotMap.RRTalonS; //rear right steer
   public static BaseMotorController rlDrive = RobotMap.RLTalonD; //rear left drive
   public static BaseMotorController rlSteer = RobotMap.RLTalonS; //rear left steer
+  
+  //values in inches
+  private final double width = 10.25; //used to be 9.5 //trackwidth
+  private final double length = 9.25; //used to be 8.5 //wheelbase
 
-  private final double width = 10.25; //used to be 9.5
-  private final double length = 8.5;
   private final double gearRatio = 59.16666666;
 
   public Swerve swerveDrivetrain;
@@ -166,7 +168,15 @@ public class SwerveDrivetrain extends Subsystem {
 	
 	public void setModeField() {
 		Robot.swerveMath.setModeField();
-	}
+  }
+  
+  public double getWidth() {
+    return width;
+  }
+
+  public double getLength() {
+    return length;
+  }
   /*public Encoder getAnalogInputFrontRight() { // Encoder was digital input
     return analogFrontRight;
   }
