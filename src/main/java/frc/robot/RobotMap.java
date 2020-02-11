@@ -51,5 +51,11 @@ public class RobotMap {
   public static AHRS navx = new AHRS(SPI.Port.kMXP);
   //public static Solenoid intakeSolenoidR = new Solenoid(8);
   //public static Solenoid intakeSolenoidL = new Solenoid(9);
+  
+  // Auto Switches
+  public static DigitalInput switch1 = new DigitalInput(0);
+  public static DigitalInput switch2 = new DigitalInput(1);
+  public static DigitalInput switch3 = new DigitalInput(2);
+  public static DigitalInput switch4 = new DigitalInput(3);
 
 }
