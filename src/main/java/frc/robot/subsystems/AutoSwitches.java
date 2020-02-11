@@ -73,7 +73,7 @@ public class AutoSwitches extends Subsystem {
       AutoCase = 13;
     }
 
-    else if (switch1==true && switch2==true && switch3==false && switch4==false){ // Case 14 - On, On, Off, Off - Same as 13
+    else if (switch1==true && switch2==true && switch3==false && switch4==true){ // Case 14 - On, On, Off, On - Same as 13
       AutoCase = 13;
     }
 
