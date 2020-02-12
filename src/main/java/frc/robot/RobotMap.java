@@ -10,6 +10,8 @@ package frc.robot;
 import com.ctre.phoenix.motorcontrol.can.VictorSPX;
 import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
 import com.kauailabs.navx.frc.AHRS;
+
+import edu.wpi.first.wpilibj.DigitalInput;
 import edu.wpi.first.wpilibj.Encoder;
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.SPI;
@@ -54,4 +56,10 @@ public class RobotMap {
   //public static Solenoid intakeSolenoidL = new Solenoid(9);
   //public static Solenoid feederSolenoidR = new Solenoid(10);
   //public static Solenoid feederSolenoidL = new Solenoid(11);
+  
+  // Auto Switches
+  public static DigitalInput switch1 = new DigitalInput(0);
+  public static DigitalInput switch2 = new DigitalInput(1);
+  public static DigitalInput switch3 = new DigitalInput(2);
+  public static DigitalInput switch4 = new DigitalInput(3);
 }

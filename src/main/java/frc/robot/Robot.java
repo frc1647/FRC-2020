@@ -29,6 +29,7 @@ import frc.robot.subsystems.Conveyor;
 import frc.robot.subsystems.Intake;
 import frc.robot.subsystems.BallFeeder;
 import frc.robot.subsystems.ClimbingMech;
+import frc.robot.subsystems.AutoSwitches;
 import frc.robot.OI;
 
 import frc.robot.commands.*;
@@ -52,6 +53,7 @@ public class Robot extends TimedRobot {
   public static Conveyor conveyor = new Conveyor();
   public static ClimbingMech climbingMech = new ClimbingMech();
   public static BallFeeder feeder = new BallFeeder();
+  public static AutoSwitches autoSwitches = new AutoSwitches();
   public static String mode;
   
   public static OI oi;
