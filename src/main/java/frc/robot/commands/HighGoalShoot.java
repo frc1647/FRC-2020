@@ -24,7 +24,7 @@ public class HighGoalShoot extends Command {
   @Override
   protected void execute() {
 
-    Robot.flywheel.highGoalShoot();
+    Robot.flywheel.highGoalSpeed();
 
   }
 

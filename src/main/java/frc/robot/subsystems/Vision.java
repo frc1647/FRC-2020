@@ -19,11 +19,11 @@ public class Vision extends Subsystem {
   // Put methods for controlling this subsystem
   // here. Call these from Commands.
 
-  NetworkTable table = NetworkTableInstance.getDefault().getTable("Limelight");
-  NetworkTableEntry tx = table.getEntry("tx");
+  NetworkTable table = NetworkTableInstance.getDefault().getTable("limelight");
+  /*NetworkTableEntry tx = table.getEntry("tx");
   NetworkTableEntry ty = table.getEntry("ty");
   NetworkTableEntry ta = table.getEntry("ta");
-  NetworkTableEntry tv = table.getEntry("tv");
+  NetworkTableEntry tv = table.getEntry("tv");*/
   
   double x;
   double y;
@@ -31,9 +31,10 @@ public class Vision extends Subsystem {
   boolean target;
 
   //Inches and degrees
-  final double camHeight = 12;
-  final double goalHeight = 98; //middle of the high goal port
-  final double camAngle = 30;
+  final double camHeight = 40; //on testbed
+  /*final double goalHeight = 98; //middle of the high goal port*/
+  final double goalHeight = 72; //middle of test retro tape
+  final double camAngle = 0; //on test bed
   double distance;
 
   public Vision(){
@@ -52,6 +53,7 @@ public class Vision extends Subsystem {
   }
 
   public boolean targeting(){
+    NetworkTableEntry tv = table.getEntry("tv");
     if(tv.getDouble(0.0) == 1){
       target = true;
     }else if(tv.getDouble(0.0) == 0){
@@ -61,17 +63,32 @@ public class Vision extends Subsystem {
   }
   
   public double getLimeX(){
+    NetworkTableEntry tx = table.getEntry("tx");
     x = tx.getDouble(0.0);
     return x;
   }
 
   public double getLimeY(){
+    NetworkTableEntry ty = table.getEntry("ty");
     y = ty.getDouble(0.0);
     return y;
   }
 
   public double getLimeArea(){
+    NetworkTableEntry ta = table.getEntry("ta");
     area = ta.getDouble(0.0);
     return area;
+  }
+
+  public double getGoalHeight(){
+    return goalHeight;
+  }
+
+  public double getCamHeight(){
+    return camHeight;
+  }
+
+  public double getCamAngle(){
+    return camAngle;
   }
 }

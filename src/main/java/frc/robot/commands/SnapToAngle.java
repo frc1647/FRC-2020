@@ -8,6 +8,7 @@
 package frc.robot.commands;
 
 import edu.wpi.first.wpilibj.command.Command;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import frc.robot.Robot;
 import frc.robot.RobotMap;
 import com.kauailabs.navx.frc.AHRS;
@@ -16,7 +17,7 @@ public class SnapToAngle extends Command {
 
   AHRS gyro = RobotMap.navx;
   int P, I, D = 1;
-  double kp = 0.1;
+  double kp = 1;
   double minCommand = 0.05;
   double integral, derivative, previousError = 0;
   double target;
@@ -49,11 +50,17 @@ public class SnapToAngle extends Command {
   @Override
   protected void execute() {
     //still need to apply PID to drive command
+    double gyroAngle = gyro.getAngle()%360;
     
-    joyX = Robot.oi.getLeftJoy().getX();
-    joyY = Robot.oi.getLeftJoy().getY();
-    rawAngle = Math.toDegrees(Math.atan2(joyY, joyX));
-    error = gyro.getAngle() - approxAngle(rawAngle);
+    joyX = Robot.oi.getRightJoy().getX();
+    joyY = -Robot.oi.getRightJoy().getY();
+    rawAngle = Math.toDegrees(Math.atan2(joyX, joyY));
+    if(rawAngle < 0){
+      rawAngle += 360;
+    } else{
+      
+    }
+    error = gyroAngle - approxAngle(rawAngle);
     /*while(target != rawAngle){
       PID();
       Robot.drivetrain.move(0, 0, error);
@@ -62,11 +69,14 @@ public class SnapToAngle extends Command {
     //gyro.getAngle() == approxAngle(rawAngle);
     turnTo();
 
-    if((gyro.getAngle() <= (approxAngle(rawAngle)) + 1.0) && gyro.getAngle() >= (approxAngle(rawAngle) - 1.0)){
+    if((gyroAngle <= (approxAngle(rawAngle)) + 1.0) && gyroAngle >= (approxAngle(rawAngle) - 1.0)){
       isFinished = true;
     } else {
       isFinished = false;
     }
+    SmartDashboard.putNumber("raw angle", rawAngle);
+    SmartDashboard.putNumber("target angle", approxAngle(rawAngle));
+    SmartDashboard.putNumber("angle error", error);
   }
 
   // Make this return true when this Command no longer needs to run execute()
@@ -89,37 +99,34 @@ public class SnapToAngle extends Command {
   void turnTo(){
     double turnSpeed = 0.0;
     double headingError = error;
-    headingError = error;
     double steeringAdjust = 0.0;
     if(headingError > 1.0){
       steeringAdjust = kp*headingError - minCommand;
     } else if(headingError < 1.0){
       steeringAdjust = kp*headingError + minCommand;
     }
-    turnSpeed += steeringAdjust;
-    Robot.drivetrain.move(0.0, 0.0, turnSpeed);
+
+    Robot.drivetrain.move(0.0, 0.0, steeringAdjust);
     }
 
   double approxAngle(double raw){
     double ang = 0;
-    if(raw >= 337.5 && raw < 22.5){
+    if(raw >= 337.5 || raw < 22.5){
       ang = 0;
-    } else if(raw >= 337.5 && raw < 22.5){
-      ang = 45;
     } else if(raw >= 22.5 && raw < 67.7){
-      ang = 90;
+      ang = 45;
     } else if(raw >= 67.5 && raw < 112.5){
-      ang = 135;
+      ang = 90;
     } else if(raw >= 112.5 && raw < 157.5){
-      ang = 180;
+      ang = 135;
     } else if(raw >= 157.5 && raw < 202.5){
-      ang = 225;
+      ang = 180;
     } else if(raw >= 202.5 && raw < 247.5){
-      ang = 270;
+      ang = 225;
     } else if(raw >= 247.5 && raw < 292.5){
-      ang = 315;
+      ang = 270;
     } else if(raw >= 292.5 && raw < 337.5){
-      ang = 360;
+      ang = 315;
     }
     return ang;
   }

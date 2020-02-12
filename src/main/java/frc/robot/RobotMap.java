@@ -13,6 +13,7 @@ import com.kauailabs.navx.frc.AHRS;
 import edu.wpi.first.wpilibj.Encoder;
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.SPI;
+import edu.wpi.first.wpilibj.Solenoid;
 //import edu.wpi.first.wpilibj.Solenoid;
 /**
  * The RobotMap is a mapping from the ports sensors and actuators are wired into
@@ -51,5 +52,6 @@ public class RobotMap {
   public static AHRS navx = new AHRS(SPI.Port.kMXP);
   //public static Solenoid intakeSolenoidR = new Solenoid(8);
   //public static Solenoid intakeSolenoidL = new Solenoid(9);
-
+  //public static Solenoid feederSolenoidR = new Solenoid(10);
+  //public static Solenoid feederSolenoidL = new Solenoid(11);
 }

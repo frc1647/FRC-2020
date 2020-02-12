@@ -81,16 +81,29 @@ public class SwerveMath {
     	rls/=max;
     }
 
-    setDirective(swerveDirectives[0], fra, frs);
-    setDirective(swerveDirectives[1], fla, fls);
-    setDirective(swerveDirectives[2], rra, rrs);
-    setDirective(swerveDirectives[3], rla, rls);
-
+    
+    if(rcw == 0){        
+        setDirective(swerveDirectives[0], fra + RobotMap.navx.getAngle()%360, frs);
+        setDirective(swerveDirectives[1], fla + RobotMap.navx.getAngle()%360, fls);
+        setDirective(swerveDirectives[2], rra + RobotMap.navx.getAngle()%360, rrs);
+        setDirective(swerveDirectives[3], rla + RobotMap.navx.getAngle()%360, rls);
+    }else{
+        setDirective(swerveDirectives[0], fra, frs);
+        setDirective(swerveDirectives[1], fla, fls);
+        setDirective(swerveDirectives[2], rra, rrs);
+        setDirective(swerveDirectives[3], rla, rls);
+    }
+    /*
+        setDirective(swerveDirectives[0], fra + RobotMap.navx.getAngle()%360, frs);
+        setDirective(swerveDirectives[1], fla + RobotMap.navx.getAngle()%360, fls);
+        setDirective(swerveDirectives[2], rra + RobotMap.navx.getAngle()%360, rrs);
+        setDirective(swerveDirectives[3], rla + RobotMap.navx.getAngle()%360, rls);
+    */
     }
 
-private void setDirective(SwerveDirective swerveDirective, double angle, double speed){
-    swerveDirective.setAngle(angle);
-    swerveDirective.setSpeed(speed);
-}
+    private void setDirective(SwerveDirective swerveDirective, double angle, double speed){
+        swerveDirective.setAngle(angle);
+        swerveDirective.setSpeed(speed);
+    }
 
 }

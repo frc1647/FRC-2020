@@ -20,6 +20,8 @@ import frc.robot.commands.SnapToAngle;
 import frc.robot.commands.ClimbArmDown;
 import frc.robot.commands.ClimbArmUp;
 import frc.robot.commands.WinchUp;
+import frc.robot.commands.FeedShooter;
+import frc.robot.commands.shootHighFromAnywhere;
 
 /**
  * This class is the glue that binds the controls on the physical operator
@@ -44,9 +46,12 @@ public class OI {
     JoystickButton climbArmDown = new JoystickButton(tablet, 9);
     JoystickButton winchUp = new JoystickButton(tablet, 10);
     JoystickButton snapToAngle = new JoystickButton(rightJoy, 1);
+    JoystickButton shoot = new JoystickButton(tablet, 11);
     
     highGoalShoot.whileHeld(new HighGoalShoot());
     lowGoalShoot.whileHeld(new LowGoalShoot());
+    shoot.whenPressed(new FeedShooter());
+
     
     alignWithGoal.whenPressed(new Align());
     

@@ -59,7 +59,7 @@ public class SwerveDrivetrain extends Subsystem {
   private static Encoder enc = RobotMap.driveEncoder;
   private static AHRS gyro = RobotMap.navx;
 
-  private final double P = 30;
+  private final double P = 6.9;
   private final double I = 0; //dont touch
   private final double D = 0.03;
 
@@ -141,7 +141,7 @@ public class SwerveDrivetrain extends Subsystem {
   }
 
   public double getGyro(){
-    return gyro.getAngle();
+    return gyro.getAngle()%360;
   }
 
   public void move(double fwd, double str, double rcw){

@@ -10,8 +10,12 @@ package frc.robot;
 import edu.wpi.first.wpilibj.TimedRobot;
 import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.command.Scheduler;
+import frc.robot.commands.turnTo;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
+import edu.wpi.first.networktables.NetworkTable;
+import edu.wpi.first.networktables.NetworkTableEntry;
+import edu.wpi.first.networktables.NetworkTableInstance;
 import edu.wpi.first.wpilibj.SensorUtil;
 import edu.wpi.first.wpilibj2.command.Subsystem;
 import frc.robot.subsystems.ExampleSubsystem;
@@ -23,6 +27,7 @@ import frc.robot.subsystems.Swerve.*;
 import frc.robot.subsystems.Vision;
 import frc.robot.subsystems.Conveyor;
 import frc.robot.subsystems.Intake;
+import frc.robot.subsystems.BallFeeder;
 import frc.robot.subsystems.ClimbingMech;
 import frc.robot.OI;
 
@@ -46,11 +51,13 @@ public class Robot extends TimedRobot {
   public static Intake intake = new Intake();
   public static Conveyor conveyor = new Conveyor();
   public static ClimbingMech climbingMech = new ClimbingMech();
+  public static BallFeeder feeder = new BallFeeder();
   public static String mode;
   
   public static OI oi;
   Command m_autonomousCommand;
   SendableChooser<Command> m_chooser = new SendableChooser<>();
+  Command turnToCommand = new turnTo();
 
   /**
    * This function is run when the robot is first started up and should be
@@ -144,6 +151,10 @@ public class Robot extends TimedRobot {
   @Override
   public void teleopPeriodic() {
     Scheduler.getInstance().run();
+    //turnToCommand.start();
+    SmartDashboard.putNumber("Vision ty", vision.getLimeY());
+    SmartDashboard.putNumber("Vision Distance", vision.getDistance());
+    
   }
 
   /**
