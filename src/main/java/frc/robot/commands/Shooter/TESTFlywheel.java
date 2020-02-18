@@ -5,20 +5,25 @@
 /* the project.                                                               */
 /*----------------------------------------------------------------------------*/
 
-package frc.robot.commands;
+package frc.robot.commands.Shooter;
 
+import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.command.Command;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
+import frc.robot.subsystems.FlyWheel;
 import frc.robot.Robot;
-import frc.robot.subsystems.Conveyor;
+import frc.robot.RobotMap;
 
-public class LoadCells extends Command {
+public class TESTFlywheel extends Command {
 
-  Conveyor conveyor = Robot.conveyor;
+  FlyWheel flywheel = Robot.flywheel;
+  Joystick rightJoy = RobotMap.rightJoy;
+  static double speed = 0;
 
-  public LoadCells() {
+  public TESTFlywheel() {
     // Use requires() here to declare subsystem dependencies
     // eg. requires(chassis);
-    requires(Robot.conveyor);
+    requires(Robot.flywheel);
   }
 
   // Called just before this Command runs the first time
@@ -29,7 +34,16 @@ public class LoadCells extends Command {
   // Called repeatedly when this Command is scheduled to run
   @Override
   protected void execute() {
-    conveyor.loadCells();
+    if(rightJoy.getRawButtonPressed(1)){
+      flywheel.setSpeed(speed);
+      if(rightJoy.getRawButtonReleased(3) && speed < 1){
+        speed += 0.05;
+      } else if(rightJoy.getRawButtonReleased(2) && speed > -1){
+        speed -= 0.05;
+      }
+    }
+
+    SmartDashboard.putNumber("Flywheel TEST Speed", speed);
   }
 
   // Make this return true when this Command no longer needs to run execute()

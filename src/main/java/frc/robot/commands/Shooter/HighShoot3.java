@@ -5,8 +5,9 @@
 /* the project.                                                               */
 /*----------------------------------------------------------------------------*/
 
-package frc.robot.commands;
+package frc.robot.commands.Shooter;
 
+import frc.robot.commands.Intake.*;
 import edu.wpi.first.wpilibj.command.CommandGroup;
 import frc.robot.Robot;
 

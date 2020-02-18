@@ -19,20 +19,14 @@ import frc.robot.RobotMap;
 public class Intake extends Subsystem {
   // Put methods for controlling this subsystem
   // here. Call these from Commands.
-  //private final Solenoid intakePistonL = RobotMap.intakeSolenoidL;
-  //private final Solenoid intakePistonR = RobotMap.intakeSolenoidR;
   private final WPI_TalonSRX intakeMotor = RobotMap.intakeTalon;
 
-  public void raise(){
-   // intakePistonL.set(false);
-    //intakePistonR.set(false);
-    intakeMotor.set(0);
+  public void loadCells(){
+    intakeMotor.set(0.5);
   }
 
-  public void lower(){
-    //intakePistonL.set(true);
-    //intakePistonR.set(true);
-    intakeMotor.set(0.75);
+  public void unloadCells(){
+    intakeMotor.set(-0.5);
   }
 
   @Override

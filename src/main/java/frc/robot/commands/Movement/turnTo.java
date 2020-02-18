@@ -5,30 +5,28 @@
 /* the project.                                                               */
 /*----------------------------------------------------------------------------*/
 
-package frc.robot.commands;
-
-import com.kauailabs.navx.frc.AHRS;
+package frc.robot.commands.Movement;
 
 import edu.wpi.first.wpilibj.command.Command;
+import edu.wpi.first.wpilibj.command.Scheduler;
+import edu.wpi.first.wpilibj2.command.ScheduleCommand;
 import frc.robot.Robot;
-import frc.robot.RobotMap;
 import frc.robot.subsystems.Vision;
+import frc.robot.subsystems.Swerve.*;
 
-public class TurnAngle extends Command {
-
-  boolean isFinished = false;
-  double targetAngle;
+public class turnTo extends Command {
+  
   Vision vision = Robot.vision;
+  double kp = -0.1;
   double minCommand = 0.05;
-  double threshold = 3.0;
-  double kp = 0.1;
-  AHRS gyro = RobotMap.navx;
+  boolean isFinished = false;
+  double threshold = 1.0;
 
-  public TurnAngle(double degrees) {
+  public turnTo() {
     // Use requires() here to declare subsystem dependencies
     // eg. requires(chassis);
+    requires(Robot.vision);
     requires(Robot.drivetrain);
-    this.targetAngle = degrees;
   }
 
   // Called just before this Command runs the first time
@@ -39,16 +37,19 @@ public class TurnAngle extends Command {
   // Called repeatedly when this Command is scheduled to run
   @Override
   protected void execute() {
-    double headingError = targetAngle - (gyro.getAngle() % 360);
+    double headingError = vision.getLimeX();
     double steeringAdjust = 0.0;
-    
-      if(headingError > threshold){
+    if(vision.targeting()){
+      if(vision.getLimeX() > threshold){
         steeringAdjust = kp*headingError - minCommand;
-      } else if(headingError < -threshold){
+      } else if(vision.getLimeX() < -threshold){
         steeringAdjust = kp*headingError + minCommand;
       }
       Robot.drivetrain.move(0.0, 0.0, steeringAdjust);
-    
+    }else{
+      Robot.drivetrain.move(0.0, 0.0, 0.1);
+    }
+
     if(headingError >= -threshold && headingError <= threshold){
       isFinished = true;
     }
@@ -63,6 +64,7 @@ public class TurnAngle extends Command {
   // Called once after isFinished returns true
   @Override
   protected void end() {
+    
   }
 
   // Called when another command which requires one or more of the same

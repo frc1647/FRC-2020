@@ -4,30 +4,21 @@
 /* must be accompanied by the FIRST BSD license file in the root directory of */
 /* the project.                                                               */
 /*----------------------------------------------------------------------------*/
-package frc.robot.commands;
 
+package frc.robot.commands.Shooter;
 
 import edu.wpi.first.wpilibj.command.Command;
 import frc.robot.Robot;
-import frc.robot.subsystems.Swerve.*;
-import frc.robot.OI;
+import frc.robot.subsystems.BallFeeder;
 
-// Motor control imports
-import com.ctre.phoenix.motorcontrol.ControlMode;
-import com.ctre.phoenix.motorcontrol.can.BaseMotorController;
-import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
-import com.ctre.phoenix.motorcontrol.can.WPI_VictorSPX;
-
-public class Drive extends Command {
-
-  private double fwd;
-  private double str;
-  private double rcw;
-
-  public Drive() {
+public class FeedShooter extends Command {
+  
+  BallFeeder feeder = Robot.feeder;
+  
+  public FeedShooter() {
     // Use requires() here to declare subsystem dependencies
     // eg. requires(chassis);
-    requires(Robot.drivetrain);
+    requires(Robot.feeder);
   }
 
   // Called just before this Command runs the first time
@@ -36,35 +27,9 @@ public class Drive extends Command {
   }
 
   // Called repeatedly when this Command is scheduled to run
-   @Override
+  @Override
   protected void execute() {
-    fwd = -Robot.oi.getLeftJoy().getY(); // - or + ?
-    str = Robot.oi.getLeftJoy().getX(); // was left joy
-    rcw = Robot.oi.getRightJoy().getX(); // was right joy
-
-    //joystick deadzone
-
-    if (fwd >= -0.1 && fwd <= 0.1){
-      fwd = 0;
-    }
-
-    if (str >= -0.1 && str <= 0.1){
-      str = 0;
-    }
-
-    if (rcw >= -0.1 && rcw <= 0.1){
-      rcw = 0;
-    }
-
-    //makes joysticcs values a parabola, while maintaining negative values
-    fwd *= fwd * Math.signum(fwd);
-    str *= str * Math.signum(str);
-    rcw *= rcw * Math.signum(rcw) * 0.5; // smaller for better control
-
-    //TRY WITH CUBE TOMORROW //update: we didn't  
-
-    //Robot.drivetrain.move(0, 0, 0);
-    Robot.drivetrain.move(fwd, str, rcw);
+    feeder.raise();
   }
 
   // Make this return true when this Command no longer needs to run execute()
@@ -76,11 +41,13 @@ public class Drive extends Command {
   // Called once after isFinished returns true
   @Override
   protected void end() {
+    feeder.lower();
   }
 
   // Called when another command which requires one or more of the same
   // subsystems is scheduled to run
   @Override
   protected void interrupted() {
+    feeder.lower();
   }
 }

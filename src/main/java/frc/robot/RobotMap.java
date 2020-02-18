@@ -37,12 +37,15 @@ public class RobotMap {
 
   
   //Motor Controllers
-  public static VictorSPX flyWheelVictor = new VictorSPX(20);
+  public static VictorSPX flyWheelVictor = new VictorSPX(20); // FOR TESTING
   public static WPI_TalonSRX intakeTalon = new WPI_TalonSRX(10);
   public static WPI_TalonSRX conveyorTalon = new WPI_TalonSRX(11);
   public static WPI_TalonSRX winchMotor1 = new WPI_TalonSRX(12);
   public static WPI_TalonSRX winchMotor2 = new WPI_TalonSRX(13); // This one is the inverted one
   public static VictorSPX climbingArmMotor = new VictorSPX(0); 
+
+  public static WPI_TalonSRX testTalon1 = new WPI_TalonSRX(40);
+  public static WPI_TalonSRX testTalon2 = new WPI_TalonSRX(41);
 
   //Joysticks
   public static Joystick leftJoy = new Joystick(1);
@@ -52,10 +55,7 @@ public class RobotMap {
   // Others
   public static Encoder driveEncoder = new Encoder(8 , 9);
   public static AHRS navx = new AHRS(SPI.Port.kMXP);
-  //public static Solenoid intakeSolenoidR = new Solenoid(8);
-  //public static Solenoid intakeSolenoidL = new Solenoid(9);
-  //public static Solenoid feederSolenoidR = new Solenoid(10);
-  //public static Solenoid feederSolenoidL = new Solenoid(11);
+  //public static Solenoid feederSolenoid = new Solenoid(10);
   
   // Auto Switches
   public static DigitalInput switch1 = new DigitalInput(0);

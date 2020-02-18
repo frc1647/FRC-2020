@@ -5,39 +5,22 @@
 /* the project.                                                               */
 /*----------------------------------------------------------------------------*/
 
-package frc.robot.commands;
+package frc.robot.commands.Movement;
 
 import edu.wpi.first.wpilibj.command.CommandGroup;
+import frc.robot.commands.Movement.turnTo;
 import frc.robot.Robot;
+import frc.robot.commands.Movement.driveTo;
 
-public class LowShoot3 extends CommandGroup {
+public class Align extends CommandGroup {
   /**
    * Add your docs here.
    */
-  public LowShoot3() {
+  public Align() {
     // Add Commands here:
     // e.g. addSequential(new Command1());
     // addSequential(new Command2());
     // these will run in order.
-    addSequential(new LowGoalShoot()); 
-    addParallel(new LoadCells());
-    try {
-      Thread.sleep(1000, 0);
-    } catch (InterruptedException e1) {
-      // TODO Auto-generated catch block
-      e1.printStackTrace();
-    }
-    
-    for (int i = 0; i < 3; i++) {
-      new FeedShooter();
-      try {
-        Thread.sleep(500, 0);
-      } catch (InterruptedException e) {
-        // TODO Auto-generated catch block
-        e.printStackTrace();
-      }
-    }
-    Robot.flywheel.stopFlyWheel();
 
     // To run multiple commands at the same time,
     // use addParallel()
@@ -50,5 +33,10 @@ public class LowShoot3 extends CommandGroup {
     // e.g. if Command1 requires chassis, and Command2 requires arm,
     // a CommandGroup containing them would require both the chassis and the
     // arm.
+    requires(Robot.vision);
+    requires(Robot.drivetrain);
+
+    addSequential(new turnTo());
+    //addSequential(new driveTo(120));
   }
 }

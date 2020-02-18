@@ -8,9 +8,9 @@
 package frc.robot.commands.AutoCases;
 
 import edu.wpi.first.wpilibj.command.CommandGroup;
-import frc.robot.commands.TurnAngle;
-import frc.robot.commands.DriveDistance;
-import frc.robot.commands.LowShoot3;
+import frc.robot.commands.Movement.TurnAngle;
+import frc.robot.commands.Movement.DriveDistance;
+import frc.robot.commands.Shooter.LowShoot3;
 
 public class case5 extends CommandGroup {
   /**

@@ -10,9 +10,12 @@ package frc.robot;
 import edu.wpi.first.wpilibj.TimedRobot;
 import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.command.Scheduler;
-import frc.robot.commands.turnTo;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
+
+import com.ctre.phoenix.motorcontrol.ControlMode;
+import com.ctre.phoenix.motorcontrol.can.BaseMotorController;
+
 import edu.wpi.first.networktables.NetworkTable;
 import edu.wpi.first.networktables.NetworkTableEntry;
 import edu.wpi.first.networktables.NetworkTableInstance;
@@ -25,7 +28,6 @@ import frc.robot.subsystems.Swerve.SwerveDrivetrain;
 import frc.robot.subsystems.Swerve.SwerveMath;
 import frc.robot.subsystems.Swerve.*;
 import frc.robot.subsystems.Vision;
-import frc.robot.subsystems.Conveyor;
 import frc.robot.subsystems.Intake;
 import frc.robot.subsystems.BallFeeder;
 import frc.robot.subsystems.ClimbingMech;
@@ -50,7 +52,6 @@ public class Robot extends TimedRobot {
   public static FlyWheel flywheel = new FlyWheel();
   public static Vision vision = new Vision();
   public static Intake intake = new Intake();
-  public static Conveyor conveyor = new Conveyor();
   public static ClimbingMech climbingMech = new ClimbingMech();
   public static BallFeeder feeder = new BallFeeder();
   public static AutoSwitches autoSwitches = new AutoSwitches();
@@ -59,7 +60,9 @@ public class Robot extends TimedRobot {
   public static OI oi;
   Command m_autonomousCommand;
   SendableChooser<Command> m_chooser = new SendableChooser<>();
-  Command turnToCommand = new turnTo();
+  
+  double speedR = 0;
+  double speedL = 0;
 
   /**
    * This function is run when the robot is first started up and should be
@@ -156,6 +159,30 @@ public class Robot extends TimedRobot {
     //turnToCommand.start();
     SmartDashboard.putNumber("Vision ty", vision.getLimeY());
     SmartDashboard.putNumber("Vision Distance", vision.getDistance());
+     
+    //testFlywheel.start();
+
+    if(RobotMap.rightJoy.getRawButtonReleased(3) && speedR < 1){
+      speedR += 0.05;
+    } else if(RobotMap.rightJoy.getRawButtonReleased(2) && speedR > -1){
+      speedR -= 0.05;
+    } 
+    if(RobotMap.rightJoy.getRawButtonPressed(1)){
+      speedR = 0;
+    }
+    RobotMap.testTalon1.set(speedR);   
+    SmartDashboard.putNumber("Right Joy TEST Speed", speedR);
+
+    if(RobotMap.leftJoy.getRawButtonReleased(3) && speedL < 1){
+      speedL += 0.05;
+    } else if(RobotMap.leftJoy.getRawButtonReleased(2) && speedL > -1){
+      speedL -= 0.05;
+    } 
+    if(RobotMap.leftJoy.getRawButtonPressed(1)){
+      speedL = 0;
+    }
+    RobotMap.testTalon2.set(speedL);    
+    SmartDashboard.putNumber("Left Joy TEST Speed", speedL);
     
   }
 

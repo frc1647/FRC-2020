@@ -5,21 +5,21 @@
 /* the project.                                                               */
 /*----------------------------------------------------------------------------*/
 
-package frc.robot.commands;
+package frc.robot.commands.Intake;
 
 import edu.wpi.first.wpilibj.command.Command;
 import frc.robot.Robot;
 import frc.robot.subsystems.Intake;
 
-public class LowerIntake extends Command {
-  public LowerIntake() {
+public class LoadCells extends Command {
+
+  Intake intake = Robot.intake;
+
+  public LoadCells() {
     // Use requires() here to declare subsystem dependencies
     // eg. requires(chassis);
     requires(Robot.intake);
   }
-
-  Intake intake = Robot.intake;
-  boolean isFinished = false;
 
   // Called just before this Command runs the first time
   @Override
@@ -29,15 +29,13 @@ public class LowerIntake extends Command {
   // Called repeatedly when this Command is scheduled to run
   @Override
   protected void execute() {
-    intake.lower();
-    isFinished = true;
+    intake.loadCells();
   }
 
   // Make this return true when this Command no longer needs to run execute()
   @Override
   protected boolean isFinished() {
-    return isFinished;
-    
+    return false;
   }
 
   // Called once after isFinished returns true

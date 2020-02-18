@@ -5,15 +5,15 @@
 /* the project.                                                               */
 /*----------------------------------------------------------------------------*/
 
-package frc.robot.commands;
+package frc.robot.commands.Climber;
 
 import edu.wpi.first.wpilibj.command.Command;
 import frc.robot.Robot;
 
-public class LowGoalShoot extends Command {
-  public LowGoalShoot() {
+public class WinchUp extends Command {
+  public WinchUp() {
 
-    requires(Robot.flywheel);
+    requires(Robot.climbingMech);
 
   }
 
@@ -24,7 +24,7 @@ public class LowGoalShoot extends Command {
   @Override
   protected void execute() {
 
-    Robot.flywheel.lowGoalSpeed();
+    Robot.climbingMech.winchUp();
 
   }
 

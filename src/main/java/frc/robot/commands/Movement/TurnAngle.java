@@ -5,29 +5,30 @@
 /* the project.                                                               */
 /*----------------------------------------------------------------------------*/
 
-package frc.robot.commands;
+package frc.robot.commands.Movement;
+
+import com.kauailabs.navx.frc.AHRS;
 
 import edu.wpi.first.wpilibj.command.Command;
 import frc.robot.Robot;
+import frc.robot.RobotMap;
 import frc.robot.subsystems.Vision;
-import frc.robot.subsystems.Swerve.*;
 
-public class driveTo extends Command {
-  
-  Vision vision = Robot.vision;
-  double kp = -0.1;
-  double minCommand = 0.05;
+public class TurnAngle extends Command {
+
   boolean isFinished = false;
-  double threshold = 1.0;
-  double distance;
+  double targetAngle;
+  Vision vision = Robot.vision;
+  double minCommand = 0.05;
+  double threshold = 3.0;
+  double kp = 0.1;
+  AHRS gyro = RobotMap.navx;
 
-  public driveTo(double distance) {
+  public TurnAngle(double degrees) {
     // Use requires() here to declare subsystem dependencies
     // eg. requires(chassis);
-    requires(Robot.vision);
     requires(Robot.drivetrain);
-
-    distance = this.distance;
+    this.targetAngle = degrees;
   }
 
   // Called just before this Command runs the first time
@@ -38,16 +39,17 @@ public class driveTo extends Command {
   // Called repeatedly when this Command is scheduled to run
   @Override
   protected void execute() {
-    double distanceError = vision.getDistance() - distance;
-    double distanceAdjust = 0.0;
-    if(vision.getDistance() > threshold){
-      distanceAdjust = kp*distanceError - minCommand;
-    } else if(vision.getDistance() < threshold){
-      distanceAdjust = kp*distanceError + minCommand;
-    }
-    Robot.drivetrain.move(distanceAdjust, 0.0, 0.0);
-
-    if(distanceError >= -threshold && distanceError <= threshold){
+    double headingError = targetAngle - (gyro.getAngle() % 360);
+    double steeringAdjust = 0.0;
+    
+      if(headingError > threshold){
+        steeringAdjust = kp*headingError - minCommand;
+      } else if(headingError < -threshold){
+        steeringAdjust = kp*headingError + minCommand;
+      }
+      Robot.drivetrain.move(0.0, 0.0, steeringAdjust);
+    
+    if(headingError >= -threshold && headingError <= threshold){
       isFinished = true;
     }
   }
@@ -67,6 +69,5 @@ public class driveTo extends Command {
   // subsystems is scheduled to run
   @Override
   protected void interrupted() {
-    isFinished = true;
   }
 }
