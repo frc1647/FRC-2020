@@ -9,12 +9,14 @@ package frc.robot.commands.Shooter;
 
 import edu.wpi.first.wpilibj.command.Command;
 import frc.robot.Robot;
+import frc.robot.subsystems.FlyWheel;
 
 public class HighGoalShoot extends Command {
+
+  FlyWheel flywheel = Robot.flywheel;
+
   public HighGoalShoot() {
-
     requires(Robot.flywheel);
-
   }
 
   @Override
@@ -23,8 +25,8 @@ public class HighGoalShoot extends Command {
 
   @Override
   protected void execute() {
-
-    Robot.flywheel.highGoalSpeed();
+    //Robot.flywheel.highGoalSpeed;
+    flywheel.setSpeed(1);
 
   }
 
@@ -35,9 +37,11 @@ public class HighGoalShoot extends Command {
 
   @Override
   protected void end() {
+    flywheel.stopFlyWheel();
   }
 
   @Override
   protected void interrupted() {
+    flywheel.stopFlyWheel();
   }
 }

@@ -9,6 +9,7 @@ package frc.robot.commands.Shooter;
 
 import edu.wpi.first.wpilibj.command.Command;
 import frc.robot.Robot;
+import frc.robot.RobotMap;
 import frc.robot.subsystems.BallFeeder;
 
 public class FeedShooter extends Command {
@@ -29,7 +30,8 @@ public class FeedShooter extends Command {
   // Called repeatedly when this Command is scheduled to run
   @Override
   protected void execute() {
-    feeder.raise();
+    //feeder.raise();
+    RobotMap.feederSolenoid.set(RobotMap.leftJoy.getTrigger()); 
   }
 
   // Make this return true when this Command no longer needs to run execute()
@@ -41,13 +43,15 @@ public class FeedShooter extends Command {
   // Called once after isFinished returns true
   @Override
   protected void end() {
-    feeder.lower();
+    //feeder.lower();
+    RobotMap.feederSolenoid.set(true);
   }
 
   // Called when another command which requires one or more of the same
   // subsystems is scheduled to run
   @Override
   protected void interrupted() {
-    feeder.lower();
+    //feeder.lower();
+    RobotMap.feederSolenoid.set(true);
   }
 }

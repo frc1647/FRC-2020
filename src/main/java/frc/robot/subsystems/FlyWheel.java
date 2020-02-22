@@ -8,6 +8,7 @@
 package frc.robot.subsystems;
 
 import com.ctre.phoenix.motorcontrol.ControlMode;
+import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
 
 import edu.wpi.first.wpilibj.command.Subsystem;
 import frc.robot.subsystems.Vision;
@@ -17,9 +18,9 @@ import frc.robot.RobotMap;
 public class FlyWheel extends Subsystem {
 
   Vision vision = Robot.vision;
+  private final WPI_TalonSRX flyWheelTalon = RobotMap.flyWheelTalon;
 
-  double flyWheelSpeed = RobotMap.flyWheelVictor.getMotorOutputPercent();
-  double speedToRPMConstant = 1;
+  double flyWheelSpeed = RobotMap.flyWheelTalon.getMotorOutputPercent();
 
   public FlyWheel() {
   }
@@ -28,20 +29,12 @@ public class FlyWheel extends Subsystem {
     return flyWheelSpeed;
   }
 
-  public void highGoalSpeed(){
-    RobotMap.flyWheelVictor.set(ControlMode.PercentOutput, 0.75);
-  }
-
-  public void lowGoalSpeed(){
-    RobotMap.flyWheelVictor.set(ControlMode.PercentOutput, 0.5);
-  }
-
   public void stopFlyWheel(){
-    RobotMap.flyWheelVictor.set(ControlMode.PercentOutput, 0);
+    flyWheelTalon.set(ControlMode.PercentOutput, 0);
   }
 
   public void setSpeed(double speed){
-    RobotMap.flyWheelVictor.set(ControlMode.PercentOutput, speed);
+    flyWheelTalon.set(ControlMode.PercentOutput, -speed);
   }
 
   @Override

@@ -22,11 +22,15 @@ public class Intake extends Subsystem {
   private final WPI_TalonSRX intakeMotor = RobotMap.intakeTalon;
 
   public void loadCells(){
-    intakeMotor.set(0.5);
+    intakeMotor.set(-0.5);
   }
 
   public void unloadCells(){
-    intakeMotor.set(-0.5);
+    intakeMotor.set(0.5);
+  }
+
+  public void stopIntake(){
+    intakeMotor.set(0);
   }
 
   @Override

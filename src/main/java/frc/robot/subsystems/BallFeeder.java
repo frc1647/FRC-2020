@@ -18,14 +18,14 @@ public class BallFeeder extends Subsystem {
   // Put methods for controlling this subsystem
   // here. Call these from Commands.
 
-  //Solenoid liftPistons = RobotMap.feederSolenoid;
+  private final Solenoid liftPistons = RobotMap.feederSolenoid;
   
   public void raise(){
-    //liftPistons.set(false);
+    liftPistons.set(false);
   }
 
   public void lower(){
-    //liftPistons.set(true);
+    liftPistons.set(true);
   }
 
   @Override

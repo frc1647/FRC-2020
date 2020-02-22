@@ -159,9 +159,13 @@ public class Robot extends TimedRobot {
     //turnToCommand.start();
     SmartDashboard.putNumber("Vision ty", vision.getLimeY());
     SmartDashboard.putNumber("Vision Distance", vision.getDistance());
-     
-    //testFlywheel.start();
 
+    //boolean isDown = RobotMap.leftJoy.getTrigger();
+    //RobotMap.feederSolenoid.set(isDown);
+    //RobotMap.feederSolenoid.set(RobotMap.leftJoy.getTrigger()); 
+
+    //testFlywheel.start();
+    /* MOTOR CONTROLLER TEST CODE
     if(RobotMap.rightJoy.getRawButtonReleased(3) && speedR < 1){
       speedR += 0.05;
     } else if(RobotMap.rightJoy.getRawButtonReleased(2) && speedR > -1){
@@ -183,7 +187,7 @@ public class Robot extends TimedRobot {
     }
     RobotMap.testTalon2.set(speedL);    
     SmartDashboard.putNumber("Left Joy TEST Speed", speedL);
-    
+    //*/
   }
 
   /**

@@ -26,26 +26,25 @@ import edu.wpi.first.wpilibj.Solenoid;
 public class RobotMap {
 
   // Swerve Motor Controllers 
-  public static WPI_TalonSRX FRTalonD = new WPI_TalonSRX(3);
+  public static VictorSPX FRTalonD = new VictorSPX(10);
   public static WPI_TalonSRX FRTalonS = new WPI_TalonSRX(2);
-  public static VictorSPX FLTalonD = new VictorSPX(1);
-  public static WPI_TalonSRX FLTalonS = new WPI_TalonSRX(6);
-  public static VictorSPX RRTalonD = new VictorSPX(2);
-  public static WPI_TalonSRX RRTalonS = new WPI_TalonSRX(7);
-  public static VictorSPX RLTalonD = new VictorSPX(0);
+  public static WPI_TalonSRX FLTalonD = new WPI_TalonSRX(7);
+  public static WPI_TalonSRX FLTalonS = new WPI_TalonSRX(3);
+  public static VictorSPX RRTalonD = new VictorSPX(8);
+  public static WPI_TalonSRX RRTalonS = new WPI_TalonSRX(6);
+  public static VictorSPX RLTalonD = new VictorSPX(9);
   public static WPI_TalonSRX RLTalonS = new WPI_TalonSRX(1);
 
-  
   //Motor Controllers
-  public static VictorSPX flyWheelVictor = new VictorSPX(20); // FOR TESTING
-  public static WPI_TalonSRX intakeTalon = new WPI_TalonSRX(10);
-  public static WPI_TalonSRX conveyorTalon = new WPI_TalonSRX(11);
-  public static WPI_TalonSRX winchMotor1 = new WPI_TalonSRX(12);
-  public static WPI_TalonSRX winchMotor2 = new WPI_TalonSRX(13); // This one is the inverted one
-  public static VictorSPX climbingArmMotor = new VictorSPX(0); 
+  public static WPI_TalonSRX flyWheelTalon = new WPI_TalonSRX(4); // FOR TESTING
+  public static WPI_TalonSRX intakeTalon = new WPI_TalonSRX(5);
+  public static WPI_TalonSRX conveyorTalon = new WPI_TalonSRX(60);
+  public static WPI_TalonSRX winchMotor1 = new WPI_TalonSRX(60);
+  public static WPI_TalonSRX winchMotor2 = new WPI_TalonSRX(60); // This one is the inverted one
+  public static VictorSPX climbingArmMotor = new VictorSPX(60); 
 
-  public static WPI_TalonSRX testTalon1 = new WPI_TalonSRX(40);
-  public static WPI_TalonSRX testTalon2 = new WPI_TalonSRX(41);
+  public static WPI_TalonSRX testTalon1 = new WPI_TalonSRX(60);
+  public static WPI_TalonSRX testTalon2 = new WPI_TalonSRX(60);
 
   //Joysticks
   public static Joystick leftJoy = new Joystick(1);
@@ -55,7 +54,7 @@ public class RobotMap {
   // Others
   public static Encoder driveEncoder = new Encoder(8 , 9);
   public static AHRS navx = new AHRS(SPI.Port.kMXP);
-  //public static Solenoid feederSolenoid = new Solenoid(10);
+  public static Solenoid feederSolenoid = new Solenoid(0);
   
   // Auto Switches
   public static DigitalInput switch1 = new DigitalInput(0);

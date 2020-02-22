@@ -9,12 +9,14 @@ package frc.robot.commands.Shooter;
 
 import edu.wpi.first.wpilibj.command.Command;
 import frc.robot.Robot;
+import frc.robot.subsystems.FlyWheel;
 
 public class LowGoalShoot extends Command {
+
+FlyWheel flywheel = Robot.flywheel;
+
   public LowGoalShoot() {
-
     requires(Robot.flywheel);
-
   }
 
   @Override
@@ -23,9 +25,7 @@ public class LowGoalShoot extends Command {
 
   @Override
   protected void execute() {
-
-    Robot.flywheel.lowGoalSpeed();
-
+    flywheel.setSpeed(0.5);
   }
 
   @Override
@@ -35,9 +35,11 @@ public class LowGoalShoot extends Command {
 
   @Override
   protected void end() {
+    flywheel.stopFlyWheel();
   }
 
   @Override
   protected void interrupted() {
+    flywheel.stopFlyWheel();
   }
 }

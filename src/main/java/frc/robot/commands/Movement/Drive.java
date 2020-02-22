@@ -38,7 +38,7 @@ public class Drive extends Command {
   // Called repeatedly when this Command is scheduled to run
    @Override
   protected void execute() {
-    fwd = -Robot.oi.getLeftJoy().getY(); // - or + ?
+    fwd = Robot.oi.getLeftJoy().getY(); // - or + ?
     str = Robot.oi.getLeftJoy().getX(); // was left joy
     rcw = Robot.oi.getRightJoy().getX(); // was right joy
 
@@ -57,9 +57,9 @@ public class Drive extends Command {
     }
 
     //makes joysticcs values a parabola, while maintaining negative values
-    fwd *= fwd * Math.signum(fwd);
-    str *= str * Math.signum(str);
-    rcw *= rcw * Math.signum(rcw) * 0.5; // smaller for better control
+    fwd *= fwd * Math.signum(fwd) * 0.5;
+    str *= str * Math.signum(str) * 0.5;
+    rcw *= rcw * Math.signum(rcw); // smaller for better control
 
     //TRY WITH CUBE TOMORROW //update: we didn't  
 

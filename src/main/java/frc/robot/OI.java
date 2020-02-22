@@ -53,7 +53,7 @@ public class OI {
 
 
     //Left Joystick Left Joystick Left Joystick Left Joystick Left Joystick
-    JoystickButton shootJoystickButton = new JoystickButton(tablet, 1);
+    JoystickButton shootJoystickButton = new JoystickButton(leftJoy, 1);
     JoystickButton highGoalShootJoystickButton = new JoystickButton(leftJoy, 3);
     JoystickButton lowGoalShootJoystickButton = new JoystickButton(leftJoy, 2);
     JoystickButton loadCellsJoystickButton = new JoystickButton(leftJoy, 5);

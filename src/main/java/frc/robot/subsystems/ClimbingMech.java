@@ -14,13 +14,8 @@ import frc.robot.RobotMap;
 
 public class ClimbingMech extends Subsystem {
 
-  double flyWheelSpeed = RobotMap.flyWheelVictor.getMotorOutputPercent();
 
   public ClimbingMech() {
-  }
-
-  public double getFlyWheelSpeed() {
-    return flyWheelSpeed;
   }
 
   public void extendClimbingArm(){
