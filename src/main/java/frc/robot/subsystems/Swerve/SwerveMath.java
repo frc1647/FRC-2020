@@ -8,7 +8,9 @@
 package frc.robot.subsystems.Swerve;
 
 import java.lang.Math;
-import frc.robot.subsystems.Swerve.CentricMode;
+
+import edu.wpi.first.wpilibj.shuffleboard.Shuffleboard;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import frc.robot.RobotMap;
 
 /**
@@ -58,6 +60,30 @@ public class SwerveMath {
     }
 
     public void move(double fwd, double str, double rcw, double gyroVal, SwerveDirective[] swerveDirectives){
+    /* WORKING SWERVE CODE
+        //Module sun gears face the OUTER RIM of the robot.
+        double a = str - rcw*(length/diagonal);
+        double b = str + rcw*(length/diagonal);
+        double c = fwd - rcw*(width/diagonal);
+        double d = fwd + rcw*(width/diagonal);
+
+        double frs = Math.sqrt(Math.pow(b,2)+Math.pow(c,2)); 
+        double fls = -Math.sqrt(Math.pow(b,2)+Math.pow(d,2));
+        double rrs = Math.sqrt(Math.pow(a,2)+Math.pow(d,2));
+        double rls = -Math.sqrt(Math.pow(a,2)+Math.pow(c,2));
+        
+        double fra = Math.atan2(b,c)*180/Math.PI;
+        double fla = Math.atan2(b,d)*180/Math.PI;
+        double rra = Math.atan2(a,d)*180/Math.PI;
+        double rla = Math.atan2(a,c)*180/Math.PI; 
+
+        if(rcw != 0 && fwd == 0 && str == 0){
+            fra = Math.atan2(b,c)*180/Math.PI - 90;
+            fla = Math.atan2(b,d)*180/Math.PI + 90;
+        }//*/
+
+    
+    //Beyblade Code
     //4048's (and everyone else's) field centric math code
     if (isFieldCentric()){
         double gyro = (gyroVal * Math.PI) / 180;
@@ -65,24 +91,6 @@ public class SwerveMath {
         str = -fwd * Math.sin(gyro) + str * Math.cos(gyro);
         fwd = temp;
     }
-
-    //calculates how far off the robot angle is relative to the field
-    //double gyroOffset = RobotMap.navx.getAngle();
-    double gyroOffset = ((gyroVal % 360) + 360) % 360;
-
-    /*while(gyroOffset > 360){
-      gyroOffset -= 360;
-    }
-    while(gyroOffset < 0){
-      gyroOffset += 360;
-    }
-    */
-    if(gyroOffset > 180){
-      gyroOffset = -(360 - gyroOffset);
-    }
-    /*if(gyroOffset < 180){
-      gyroOffset = gyroOffset;
-    }*/
     
     double a = str - rcw*(length/diagonal);
     double b = str + rcw*(length/diagonal);
@@ -93,24 +101,11 @@ public class SwerveMath {
     double fls = Math.sqrt(Math.pow(b,2)+Math.pow(d,2));
     double rrs = Math.sqrt(Math.pow(a,2)+Math.pow(d,2));
     double rls = Math.sqrt(Math.pow(a,2)+Math.pow(c,2));
-    
-    double fra;
-    double fla;
-    double rra;
-    double rla;
 
-    /*if(isFieldCentric() && rcw == 0){
-        fra = Math.atan2(b,c)*180/Math.PI + gyroOffset;
-        fla = Math.atan2(b,d)*180/Math.PI + gyroOffset;
-        rra = Math.atan2(a,d)*180/Math.PI + gyroOffset;
-        rla = Math.atan2(a,c)*180/Math.PI + gyroOffset;
-    }else{*/
-    fra = Math.atan2(b,c)*180/Math.PI;
-    fla = Math.atan2(b,d)*180/Math.PI;
-    rra = Math.atan2(a,d)*180/Math.PI;
-    rla = Math.atan2(a,c)*180/Math.PI;
-    // __ = arctan(str, fwd)*180/pi - gyroOffset
-    //}
+    double fra = -Math.atan2(b,c)*180/Math.PI;
+    double fla = Math.atan2(b,d)*180/Math.PI;
+    double rra = -Math.atan2(a,d)*180/Math.PI;
+    double rla = Math.atan2(a,c)*180/Math.PI;
 
     //double temp = (fwd*Math.cos(gyro.getAngle())) + str*Math.sin(gyro.getAngle());
     double max = frs; 
@@ -121,7 +116,7 @@ public class SwerveMath {
     	max = rls;
     }
     if(rrs>max){
-    	max = rrs;
+        max = rrs;
     }
     if(max>1){
     	frs/=max;
@@ -129,11 +124,17 @@ public class SwerveMath {
     	rrs/=max;
     	rls/=max;
     }
+
     //changes -180 to 180 angles to -0.5 to 0.5 angles 
     fra /= 360;
     fla /= 360;
     rra /= 360;
     rla /= 360;
+
+    SmartDashboard.putNumber("FR ANGLE", fra);
+    SmartDashboard.putNumber("FL ANGLE", fla);
+    SmartDashboard.putNumber("RR ANGLE", rra);
+    SmartDashboard.putNumber("RL ANGLE", rla);
 
     setDirective(swerveDirectives[0], fra, frs);
     setDirective(swerveDirectives[1], fla, fls);
@@ -142,12 +143,11 @@ public class SwerveMath {
 
     }
 
-private void setDirective(SwerveDirective swerveDirective, double angle, double speed){
-    swerveDirective.setAngle(angle);
-    swerveDirective.setSpeed(speed);
-}
-private boolean isFieldCentric(){
-    return centricMode.equals(CentricMode.Field);
-}
-
+    private void setDirective(SwerveDirective swerveDirective, double angle, double speed){
+        swerveDirective.setAngle(angle);
+        swerveDirective.setSpeed(speed);
+    }
+    private boolean isFieldCentric(){
+        return centricMode.equals(CentricMode.Field);
+    }
 }

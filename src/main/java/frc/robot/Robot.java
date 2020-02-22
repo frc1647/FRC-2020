@@ -12,15 +12,30 @@ import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.command.Scheduler;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
+
+import com.ctre.phoenix.motorcontrol.ControlMode;
+import com.ctre.phoenix.motorcontrol.can.BaseMotorController;
+
+import edu.wpi.first.networktables.NetworkTable;
+import edu.wpi.first.networktables.NetworkTableEntry;
+import edu.wpi.first.networktables.NetworkTableInstance;
+import edu.wpi.first.wpilibj.SensorUtil;
 import edu.wpi.first.wpilibj2.command.Subsystem;
 import frc.robot.subsystems.ExampleSubsystem;
+import frc.robot.subsystems.FlyWheel;
 import frc.robot.subsystems.Swerve.Swerve;
 import frc.robot.subsystems.Swerve.SwerveDrivetrain;
 import frc.robot.subsystems.Swerve.SwerveMath;
 import frc.robot.subsystems.Swerve.*;
+import frc.robot.subsystems.Vision;
+import frc.robot.subsystems.Intake;
+import frc.robot.subsystems.BallFeeder;
+import frc.robot.subsystems.ClimbingMech;
+import frc.robot.subsystems.AutoSwitches;
 import frc.robot.OI;
 
 import frc.robot.commands.*;
+import frc.robot.commands.Movement.*;
 /* Motor testing Stuff */
 
 /**
@@ -36,12 +51,20 @@ public class Robot extends TimedRobot {
   public static SwerveDirective directive = new SwerveDirective();
   public static SwerveMath swerveMath = new SwerveMath(drivetrain.getWidth(), drivetrain.getLength());
   public static SwapCentricMode swapCentricMode = new SwapCentricMode();
+  public static FlyWheel flywheel = new FlyWheel();
+  public static Vision vision = new Vision();
+  public static Intake intake = new Intake();
+  public static ClimbingMech climbingMech = new ClimbingMech();
+  public static BallFeeder feeder = new BallFeeder();
+  public static AutoSwitches autoSwitches = new AutoSwitches();
   public static String mode;
-
+  
   public static OI oi;
-public static Subsystem testShooting;
   Command m_autonomousCommand;
   SendableChooser<Command> m_chooser = new SendableChooser<>();
+  
+  double speedR = 0;
+  double speedL = 0;
 
   /**
    * This function is run when the robot is first started up and should be
@@ -65,12 +88,7 @@ public static Subsystem testShooting;
    */
   @Override
   public void robotPeriodic() {
-    if (drivetrain.getModeRobot() == CentricMode.Robot){
-      mode = "Robot";
-    }else{
-      mode = "Field";
-    }
-    SmartDashboard.putString("DriveMode", mode);
+    
   }
 
   /**
@@ -140,23 +158,38 @@ public static Subsystem testShooting;
   @Override
   public void teleopPeriodic() {
     Scheduler.getInstance().run();
-    
-    //double speed = Robot.oi.getLeftJoy().getY();
-    /*//This is to test the flywheel percent output with the XBOX controller
-    double speed = 0;
-    if(Robot.oi.getLeftJoy().getRawButton(1)) {
-      speed = 0.75;
-    } else if (Robot.oi.getLeftJoy().getRawButton(2)) {
-      speed = 0.8;
-    } else if (Robot.oi.getLeftJoy().getRawButton(3)) {
-      speed = 0.9;
-    } else if (Robot.oi.getLeftJoy().getRawButton(4)) {
-      speed = 1.0;
-    } else {
-      speed = 0;
+    //turnToCommand.start();
+    SmartDashboard.putNumber("Vision ty", vision.getLimeY());
+    SmartDashboard.putNumber("Vision Distance", vision.getDistance());
+
+    //boolean isDown = RobotMap.leftJoy.getTrigger();
+    //RobotMap.feederSolenoid.set(isDown);
+    //RobotMap.feederSolenoid.set(RobotMap.leftJoy.getTrigger()); 
+
+    //testFlywheel.start();
+    /* MOTOR CONTROLLER TEST CODE
+    if(RobotMap.rightJoy.getRawButtonReleased(3) && speedR < 1){
+      speedR += 0.05;
+    } else if(RobotMap.rightJoy.getRawButtonReleased(2) && speedR > -1){
+      speedR -= 0.05;
+    } 
+    if(RobotMap.rightJoy.getRawButtonPressed(1)){
+      speedR = 0;
     }
-    RobotMap.testTalon.set(speed);
-    */
+    RobotMap.testTalon1.set(speedR);   
+    SmartDashboard.putNumber("Right Joy TEST Speed", speedR);
+
+    if(RobotMap.leftJoy.getRawButtonReleased(3) && speedL < 1){
+      speedL += 0.05;
+    } else if(RobotMap.leftJoy.getRawButtonReleased(2) && speedL > -1){
+      speedL -= 0.05;
+    } 
+    if(RobotMap.leftJoy.getRawButtonPressed(1)){
+      speedL = 0;
+    }
+    RobotMap.testTalon2.set(speedL);    
+    SmartDashboard.putNumber("Left Joy TEST Speed", speedL);
+    //*/
   }
 
   /**

@@ -11,7 +11,6 @@ import com.ctre.phoenix.motorcontrol.ControlMode;
 import com.ctre.phoenix.motorcontrol.can.BaseMotorController;
 import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
 import com.ctre.phoenix.motorcontrol.can.WPI_VictorSPX;
-import frc.robot.Robot;
 
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
@@ -36,7 +35,7 @@ private boolean reverseSteer = false;
         this.gearRatio = gearRatio;
     }
 
-private double encTicPerRotate = 28 * gearRatio;
+    private double encTicPerRotate = 28 * gearRatio;
 
     public void stop(){
         driveMotor.set(ControlMode.PercentOutput, 0);
@@ -54,15 +53,7 @@ private double encTicPerRotate = 28 * gearRatio;
     }*/
 
     public void setAngle(double angle){
-        //commented for testing 4048 code
-        /*if (reverseSteer){
-            //steerMotor.set(ControlMode.Position, -1 * angle * gearRatio);
-            steerMotor.set(ControlMode.Position, angle);
-        }
-        else{ 
-            //steerMotor.set(ControlMode.Position, 1 * angle * gearRatio); 
-            steerMotor.set(ControlMode.Position, angle);
-        }*/
+        //more beyblade code
         steerMotor.set(ControlMode.Position, (reverseSteer ? -1 : 1) * angle * encTicPerRotate);
     }
 
@@ -82,8 +73,8 @@ private double encTicPerRotate = 28 * gearRatio;
         int encPosition = getEncPosition();
         angle = convertAngle(angle, encPosition);
         
-        //the following was brought to you by team 4048's code
-        if (shouldReverse(angle, encPosition)) {
+        //beyblade code
+        if(shouldReverse(angle, encPosition)) {
             if(angle < 0){
                 angle += 0.5;
             } else {
@@ -91,9 +82,9 @@ private double encTicPerRotate = 28 * gearRatio;
             }
             speed *= -1;
         }
-
+        
         setSpeed(speed);
-        if (speed != 0.0) { 
+        if (speed != 0.0){ 
             setAngle(angle); 
             //System.out.println(angle);
         }
@@ -101,12 +92,12 @@ private double encTicPerRotate = 28 * gearRatio;
 
     //checks if the wheel is at a spot to reverse to get to desired direction
     //The subsequen \t set and get angles all work towards making sure the wheel will turn the right direction
-    public boolean shouldReverse(double angle, double encoderValue){
+    public boolean shouldReverse(double wa, double encoderValue){
         double ea = SwerveUtil.convertEncoderValue(encoderValue, encTicPerRotate);
 		
-		if(angle < 0)	angle += 1;
+		if(wa < 0)	wa += 1;
 		
-		double longDiff = Math.abs(angle - ea);
+		double longDiff = Math.abs(wa - ea);
 		
 		double diff = Math.min(longDiff, 1.0-longDiff);
 		
@@ -116,10 +107,7 @@ private double encTicPerRotate = 28 * gearRatio;
     }
     
     private double convertAngle(double angle, double encoderValue){
-        
-        
-        /*commented out to test stuff
-        SmartDashboard.putNumber("convAng inAngle", angle);
+        /*SmartDashboard.putNumber("convAng inAngle", angle);
         SmartDashboard.putNumber("convAng encValue", encoderValue);
         double encPos = modPos(encoderValue, encTicPerRotate);
         double currAngle = encPos/encTicPerRotate;
@@ -171,7 +159,7 @@ private double encTicPerRotate = 28 * gearRatio;
             reverse = 1; // FIXED SWERVE, -1 TO +1
         }
         else{ reverse = 1; }*/
-		return reverse * steerMotor.getSelectedSensorPosition(0);
+		return reverse * steerMotor.getSelectedSensorPosition(0); //may be BAD
     }
 
     public boolean isReverseEncoder(){

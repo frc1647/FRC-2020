@@ -8,68 +8,101 @@
 package frc.robot;
 
 import edu.wpi.first.wpilibj.Joystick;
-import edu.wpi.first.wpilibj.XboxController;
-import edu.wpi.first.wpilibj.XboxController.Button;
-//import edu.wpi.first.wpilibj2.command.button.JoystickButton;
-import frc.robot.commands.ResetEnc;
-import frc.robot.commands.SwapCentricMode;
 import edu.wpi.first.wpilibj.buttons.JoystickButton;
+import frc.robot.commands.Climber.*;
+import frc.robot.commands.Intake.*;
+import frc.robot.commands.Movement.*;
+import frc.robot.commands.Shooter.*;
+/*import frc.robot.commands.HighGoalShoot;
+import frc.robot.commands.LowGoalShoot;
+import frc.robot.commands.Align;
+import frc.robot.commands.LoadCells;
+import frc.robot.commands.UnloadCells;
+import frc.robot.commands.SnapToAngle;
+import frc.robot.commands.ClimbArmDown;
+import frc.robot.commands.ClimbArmUp;
+import frc.robot.commands.WinchUp;
+import frc.robot.commands.FeedShooter;
+import frc.robot.commands.shootHighFromAnywhere;*/
 
 /**
  * This class is the glue that binds the controls on the physical operator
  * interface to the commands and command groups that allow control of the robot.
  */
 public class OI {
+  
   Joystick leftJoy = RobotMap.leftJoy;
-  Joystick righJoy = RobotMap.rightJoy;
+  Joystick rightJoy = RobotMap.rightJoy;
+  Joystick tablet = RobotMap.tablet;
 
   public OI(){
+    //Right Joystick Right Joystick Right Joystick Right Joystick Right Joystick
+    JoystickButton snapToAngle = new JoystickButton(rightJoy, 1);
+    JoystickButton alignWithGoalJoystickButton = new JoystickButton(rightJoy, 3);
+    JoystickButton climbArmUpJoystickButton = new JoystickButton(rightJoy, 5);
+    JoystickButton climbArmDownJoystickButton = new JoystickButton(rightJoy, 4);
+    JoystickButton winchUpJoystickButton = new JoystickButton(rightJoy, 2);
 
-    JoystickButton resetEnc = new JoystickButton(righJoy, 5);
-    JoystickButton swapCentricModeButton = new JoystickButton(righJoy, 2);
-    //ResetEnc encReset = new ResetEnc(); 
-    // resetEnc.whenPressed((edu.wpi.first.wpilibj2.command.Command) new ResetEnc());
-    resetEnc.whenPressed(new ResetEnc());
-    //resetENCValue.close();
-    swapCentricModeButton.whenPressed(new SwapCentricMode());
+    alignWithGoalJoystickButton.whenPressed(new Align());
+        
+    snapToAngle.whileHeld(new SnapToAngle());
+    
+    climbArmUpJoystickButton.whileHeld(new ClimbArmUp());
+    climbArmDownJoystickButton.whileHeld(new ClimbArmDown());
+    winchUpJoystickButton.whileHeld(new WinchUp());
+
+
+    //Left Joystick Left Joystick Left Joystick Left Joystick Left Joystick
+    JoystickButton shootJoystickButton = new JoystickButton(leftJoy, 1);
+    JoystickButton highGoalShootJoystickButton = new JoystickButton(leftJoy, 3);
+    JoystickButton lowGoalShootJoystickButton = new JoystickButton(leftJoy, 2);
+    JoystickButton loadCellsJoystickButton = new JoystickButton(leftJoy, 5);
+    JoystickButton unloadCellsJoystickButton = new JoystickButton(leftJoy, 4);
+
+    shootJoystickButton.whenPressed(new FeedShooter());
+
+    highGoalShootJoystickButton.whileHeld(new HighGoalShoot());
+    lowGoalShootJoystickButton.whileHeld(new LowGoalShoot());
+
+    loadCellsJoystickButton.whileHeld(new LoadCells());
+    unloadCellsJoystickButton.whileHeld(new UnloadCells());
+
+
+    //Tablet Tablet Tablet Tablet Tablet
+    JoystickButton highGoalShoot = new JoystickButton(tablet, 1);
+    JoystickButton lowGoalShoot = new JoystickButton(tablet, 2);
+    JoystickButton alignWithGoal = new JoystickButton(tablet, 3);
+    JoystickButton loadCells = new JoystickButton(tablet, 6);
+    JoystickButton unloadCells = new JoystickButton(tablet, 7);
+    JoystickButton climbArmUp = new JoystickButton(tablet, 8);
+    JoystickButton climbArmDown = new JoystickButton(tablet, 9);
+    JoystickButton winchUp = new JoystickButton(tablet, 10);
+    JoystickButton snapToAngleTableButton = new JoystickButton(rightJoy, 1);
+    JoystickButton shoot = new JoystickButton(tablet, 11);
+    
+    highGoalShoot.whileHeld(new HighGoalShoot());
+    lowGoalShoot.whileHeld(new LowGoalShoot());
+    shoot.whenPressed(new FeedShooter());
+    
+    alignWithGoal.whenPressed(new Align());
+    
+    loadCells.whileHeld(new LoadCells());
+    unloadCells.whileHeld(new UnloadCells());
+    
+    climbArmUp.whileHeld(new ClimbArmUp());
+    climbArmDown.whileHeld(new ClimbArmDown());
+    winchUp.whileHeld(new WinchUp());
+  
   }
 
   public Joystick getLeftJoy(){
     return leftJoy;
   }
   public Joystick getRightJoy() {
-    return righJoy;
+    return rightJoy;
   }
-
-  /*public JoystickButton getCentricButton(){
-    return swapCentricModeButton;
-  }*/
+  public Joystick getTablet(){
+    return tablet;
+  }
   
-  //// CREATING BUTTONS
-  // One type of button is a joystick button which is any button on a
-  //// joystick.
-  // You create one by telling it which joystick it's on and which button
-  // number it is.
-  // Joystick stick = new Joystick(port);
-  // Button button = new JoystickButton(stick, buttonNumber);
-
-  // There are a few additional built in buttons you can use. Additionally,
-  // by subclassing Button you can create custom triggers and bind those to
-  // commands the same as any other Button.
-
-  //// TRIGGERING COMMANDS WITH BUTTONS
-  // Once you have a button, it's trivial to bind it to a button in one of
-  // three ways:
-
-  // Start the command when the button is pressed and let it run the command
-  // until it is finished as determined by it's isFinished method.
-  // button.whenPressed(new ExampleCommand());
-
-  // Run the command while the button is being held down and interrupt it once
-  // the button is released.
-  // button.whileHeld(new ExampleCommand());
-
-  // Start the command when the button is released and let it run the command
-  // until it is finished as determined by it's isFinished method.
-  // button.whenReleased(new ExampleCommand());
 }

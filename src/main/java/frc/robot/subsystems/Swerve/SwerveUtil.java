@@ -20,7 +20,6 @@ public class SwerveUtil {
 		return encPos;
 	}
 	
-	//not used
 	public static double convertAngle(double angle, double gearRatio){
 		double encVal = angle;
 		
