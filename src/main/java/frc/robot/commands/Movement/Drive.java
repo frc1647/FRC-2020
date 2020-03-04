@@ -11,6 +11,7 @@ import edu.wpi.first.wpilibj.command.Command;
 import frc.robot.Robot;
 import frc.robot.subsystems.Swerve.*;
 import frc.robot.OI;
+import frc.robot.commands.*;
 
 // Motor control imports
 import com.ctre.phoenix.motorcontrol.ControlMode;
@@ -56,14 +57,26 @@ public class Drive extends Command {
       rcw = 0;
     }
 
+    /*
+    if((fwd > 0 || fwd < 0) || (str > 0 && str < 0)){
+      rcw = 0;
+    }
+    //*/
+
     //makes joysticcs values a parabola, while maintaining negative values
-    fwd *= fwd * Math.signum(fwd) * 0.5;
-    str *= str * Math.signum(str) * 0.5;
+    fwd *= fwd * Math.signum(fwd);
+    str *= str * Math.signum(str);
     rcw *= rcw * Math.signum(rcw); // smaller for better control
 
     //TRY WITH CUBE TOMORROW //update: we didn't  
 
     //Robot.drivetrain.move(0, 0, 0);
+    /*if(){
+      Robot.drivetrain.move(fwd, str, rcw);
+    } else {
+      Robot.drivetrain.move(0, 0, 0);
+    }//*/
+    
     Robot.drivetrain.move(fwd, str, rcw);
   }
 

@@ -8,24 +8,22 @@
 package frc.robot.subsystems;
 
 import edu.wpi.first.wpilibj.command.Subsystem;
+import frc.robot.Robot;
 import frc.robot.RobotMap;
-import edu.wpi.first.wpilibj.Solenoid;
+import io.github.pseudoresonance.pixy2api.Pixy2;
+import io.github.pseudoresonance.pixy2api.links.Link;
+import io.github.pseudoresonance.pixy2api.links.SPILink;
 
 /**
  * Add your docs here.
  */
-public class BallFeeder extends Subsystem {
+public class PixyVision extends Subsystem {
   // Put methods for controlling this subsystem
   // here. Call these from Commands.
+  private Pixy2 pixy = RobotMap.pixy;
 
-  private final Solenoid liftPistons = RobotMap.feederSolenoid;
-  
-  public void raise(){
-    liftPistons.set(true);
-  }
-
-  public void lower(){
-    liftPistons.set(false);
+  public PixyVision(){
+    pixy.init();
   }
 
   @Override

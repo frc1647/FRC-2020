@@ -9,6 +9,7 @@ package frc.robot;
 
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.buttons.JoystickButton;
+import edu.wpi.first.wpilibj.XboxController;
 import frc.robot.commands.Climber.*;
 import frc.robot.commands.Intake.*;
 import frc.robot.commands.Movement.*;
@@ -43,7 +44,7 @@ public class OI {
     JoystickButton climbArmDownJoystickButton = new JoystickButton(rightJoy, 4);
     JoystickButton winchUpJoystickButton = new JoystickButton(rightJoy, 2);
 
-    alignWithGoalJoystickButton.whenPressed(new Align());
+    alignWithGoalJoystickButton.whenPressed(new turnTo());
         
     snapToAngle.whileHeld(new SnapToAngle());
     
@@ -59,7 +60,7 @@ public class OI {
     JoystickButton loadCellsJoystickButton = new JoystickButton(leftJoy, 5);
     JoystickButton unloadCellsJoystickButton = new JoystickButton(leftJoy, 4);
 
-    shootJoystickButton.whenPressed(new FeedShooter());
+    shootJoystickButton.whileHeld(new FeedShooter());
 
     highGoalShootJoystickButton.whileHeld(new HighGoalShoot());
     lowGoalShootJoystickButton.whileHeld(new LowGoalShoot());
@@ -67,32 +68,60 @@ public class OI {
     loadCellsJoystickButton.whileHeld(new LoadCells());
     unloadCellsJoystickButton.whileHeld(new UnloadCells());
 
-
+/*
     //Tablet Tablet Tablet Tablet Tablet
     JoystickButton highGoalShoot = new JoystickButton(tablet, 1);
     JoystickButton lowGoalShoot = new JoystickButton(tablet, 2);
-    JoystickButton alignWithGoal = new JoystickButton(tablet, 3);
-    JoystickButton loadCells = new JoystickButton(tablet, 6);
-    JoystickButton unloadCells = new JoystickButton(tablet, 7);
+    JoystickButton shoot = new JoystickButton(tablet, 3);
+    JoystickButton loadCells = new JoystickButton(tablet, 4);
+    JoystickButton unloadCells = new JoystickButton(tablet, 5);
+    JoystickButton snapToAngleTabletButton = new JoystickButton(tablet, 6);
+    JoystickButton alignWithGoal = new JoystickButton(tablet, 7);
     JoystickButton climbArmUp = new JoystickButton(tablet, 8);
     JoystickButton climbArmDown = new JoystickButton(tablet, 9);
-    JoystickButton winchUp = new JoystickButton(tablet, 10);
-    JoystickButton snapToAngleTableButton = new JoystickButton(rightJoy, 1);
-    JoystickButton shoot = new JoystickButton(tablet, 11);
+    JoystickButton windWinch = new JoystickButton(tablet, 10);
+    JoystickButton unwindWinch = new JoystickButton(tablet, 11);
     
     highGoalShoot.whileHeld(new HighGoalShoot());
     lowGoalShoot.whileHeld(new LowGoalShoot());
-    shoot.whenPressed(new FeedShooter());
+    shoot.whileHeld(new FeedShooter());
+
+    loadCells.whileHeld(new LoadCells());
+    unloadCells.whileHeld(new UnloadCells());
     
-    alignWithGoal.whenPressed(new Align());
+    snapToAngleTabletButton.whileHeld(new SnapToAngle());
+    alignWithGoal.whenPressed(new turnTo());
     
+    climbArmUp.whileHeld(new ClimbArmUp());
+    climbArmDown.whileHeld(new ClimbArmDown());
+    windWinch.whileHeld(new WinchUp());
+    //unwindWinch.whileHeld(new WinchDown());
+  //*/
+
+  ///*
+    //ALT Tablet ALT Tablet ALT Tablet ALT Tablet ALT Tablet
+    JoystickButton highGoalShoot = new JoystickButton(tablet, 1);
+    JoystickButton lowGoalShoot = new JoystickButton(tablet, 2);
+    JoystickButton shoot = new JoystickButton(tablet, 3);
+    JoystickButton loadCells = new JoystickButton(tablet, 4);
+    JoystickButton unloadCells = new JoystickButton(tablet, 5);
+    JoystickButton climbArmUp = new JoystickButton(tablet, 6);
+    JoystickButton climbArmDown = new JoystickButton(tablet, 7);
+    JoystickButton windWinch = new JoystickButton(tablet, 8);
+    
+    highGoalShoot.whileHeld(new HighGoalShoot());
+    lowGoalShoot.whileHeld(new LowGoalShoot());
+    shoot.whileHeld(new FeedShooter());
+
     loadCells.whileHeld(new LoadCells());
     unloadCells.whileHeld(new UnloadCells());
     
     climbArmUp.whileHeld(new ClimbArmUp());
     climbArmDown.whileHeld(new ClimbArmDown());
-    winchUp.whileHeld(new WinchUp());
-  
+    windWinch.whileHeld(new WinchUp());
+    //windWinch.whileHeld(new WinchDown());
+  //*/
+
   }
 
   public Joystick getLeftJoy(){

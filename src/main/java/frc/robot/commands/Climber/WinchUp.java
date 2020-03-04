@@ -9,8 +9,12 @@ package frc.robot.commands.Climber;
 
 import edu.wpi.first.wpilibj.command.Command;
 import frc.robot.Robot;
+import frc.robot.subsystems.ClimbingMech;
 
 public class WinchUp extends Command {
+
+  ClimbingMech winch = Robot.climbingMech;
+
   public WinchUp() {
 
     requires(Robot.climbingMech);
@@ -23,9 +27,7 @@ public class WinchUp extends Command {
 
   @Override
   protected void execute() {
-
-    Robot.climbingMech.winchUp();
-
+    winch.winchUp();
   }
 
   @Override
@@ -35,9 +37,11 @@ public class WinchUp extends Command {
 
   @Override
   protected void end() {
+    winch.winchStop();
   }
 
   @Override
   protected void interrupted() {
+    winch.winchStop();
   }
 }

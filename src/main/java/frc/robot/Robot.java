@@ -16,6 +16,7 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import com.ctre.phoenix.motorcontrol.ControlMode;
 import com.ctre.phoenix.motorcontrol.can.BaseMotorController;
 
+import edu.wpi.first.cameraserver.CameraServer;
 import edu.wpi.first.networktables.NetworkTable;
 import edu.wpi.first.networktables.NetworkTableEntry;
 import edu.wpi.first.networktables.NetworkTableInstance;
@@ -32,6 +33,12 @@ import frc.robot.subsystems.Intake;
 import frc.robot.subsystems.BallFeeder;
 import frc.robot.subsystems.ClimbingMech;
 import frc.robot.subsystems.AutoSwitches;
+import frc.robot.commands.AutoCases.*;
+import frc.robot.commands.Movement.AutoForward;
+import frc.robot.commands.Movement.turnTo;
+import frc.robot.commands.Shooter.FeedShooter;
+import frc.robot.commands.Shooter.HighGoalShoot;
+import frc.robot.commands.Shooter.HighShoot3;
 import frc.robot.OI;
 
 import frc.robot.commands.*;
@@ -60,9 +67,17 @@ public class Robot extends TimedRobot {
   public static OI oi;
   Command m_autonomousCommand;
   SendableChooser<Command> m_chooser = new SendableChooser<>();
+
+  Command autoCase;
   
   double speedR = 0;
   double speedL = 0;
+
+  Command driveOff = new AutoForward();
+  Command turnTo = new turnTo();
+  Command high3 = new HighShoot3();
+  Command shoot = new FeedShooter();
+  //Command highSpeed = new HighGoalShoot();
 
   /**
    * This function is run when the robot is first started up and should be
@@ -74,6 +89,7 @@ public class Robot extends TimedRobot {
     m_chooser.setDefaultOption("Default Auto", new ExampleCommand());
     // chooser.addOption("My Auto", new MyAutoCommand());
     SmartDashboard.putData("Auto mode", m_chooser);
+    CameraServer.getInstance().startAutomaticCapture();
   }
 
   /**
@@ -96,11 +112,13 @@ public class Robot extends TimedRobot {
    */
   @Override
   public void disabledInit() {
+    vision.lightsOff();
   }
 
   @Override
   public void disabledPeriodic() {
     Scheduler.getInstance().run();
+    vision.lightsOff();
   }
 
   /**
@@ -117,7 +135,8 @@ public class Robot extends TimedRobot {
   @Override
   public void autonomousInit() {
     m_autonomousCommand = m_chooser.getSelected();
-
+    driveOff.start();
+    //highSpeed.start();
     /*
      * String autoSelected = SmartDashboard.getString("Auto Selector",
      * "Default"); switch(autoSelected) { case "My Auto": autonomousCommand
@@ -125,10 +144,49 @@ public class Robot extends TimedRobot {
      * autonomousCommand = new ExampleCommand(); break; }
      */
 
-    // schedule the autonomous command (example)
+    // schedule the autonomous command (example7
+    
     if (m_autonomousCommand != null) {
       m_autonomousCommand.start();
+      
     }
+    
+    vision.lightsOn();
+    int caseNum = autoSwitches.getAutoSwitches();
+    /*
+    switch(caseNum){
+      case 1: autoCase = new case1();
+              break;
+      case 2: autoCase = new case2();
+              break;
+      case 3: autoCase = new case3();
+              break;
+      case 4: autoCase = new case4();
+              break;
+      case 5: autoCase = new case5();
+              break;
+      case 6: autoCase = new case6();
+              break;
+      case 7: autoCase = new case7();
+              break;
+      case 8: autoCase = new case8();
+              break;
+      case 9: autoCase = new case9();
+              break;
+      case 10: autoCase = new case10();
+              break;
+      case 11: autoCase = new case11();
+              break;
+      case 12: autoCase = new case12();
+              break;
+      case 13: autoCase = new case13();
+              break;
+      default: break;
+    }//*/
+    //autoCase = new caseDefault();
+    //autoCase.start();
+    SmartDashboard.putNumber("Auto Case", caseNum);
+    
   }
 
   /**
@@ -137,6 +195,9 @@ public class Robot extends TimedRobot {
   @Override
   public void autonomousPeriodic() {
     Scheduler.getInstance().run();
+    //driveOff.start();
+    //turnTo.start();
+    //high3.start();
   }
 
   @Override
@@ -148,6 +209,10 @@ public class Robot extends TimedRobot {
     if (m_autonomousCommand != null) {
       m_autonomousCommand.cancel();
     }
+    
+    vision.lightsOn();
+    //driveOff.start();
+    //vision.lightsOff();
   }
 
   /**
@@ -159,7 +224,11 @@ public class Robot extends TimedRobot {
     //turnToCommand.start();
     SmartDashboard.putNumber("Vision ty", vision.getLimeY());
     SmartDashboard.putNumber("Vision Distance", vision.getDistance());
+    //driveOff.start();
+    vision.lightsOn();
 
+    //int caseNum = autoSwitches.getAutoSwitches();
+    //SmartDashboard.putNumber("Auto Case", caseNum);
     //boolean isDown = RobotMap.leftJoy.getTrigger();
     //RobotMap.feederSolenoid.set(isDown);
     //RobotMap.feederSolenoid.set(RobotMap.leftJoy.getTrigger()); 
@@ -188,6 +257,7 @@ public class Robot extends TimedRobot {
     RobotMap.testTalon2.set(speedL);    
     SmartDashboard.putNumber("Left Joy TEST Speed", speedL);
     //*/
+
   }
 
   /**
@@ -195,6 +265,7 @@ public class Robot extends TimedRobot {
    */
   @Override
   public void testPeriodic() {
+    
   }
 
 

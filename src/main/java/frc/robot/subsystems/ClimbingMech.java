@@ -8,35 +8,47 @@
 package frc.robot.subsystems;
 
 import com.ctre.phoenix.motorcontrol.ControlMode;
+import com.ctre.phoenix.motorcontrol.can.VictorSPX;
+import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
 
 import edu.wpi.first.wpilibj.command.Subsystem;
 import frc.robot.RobotMap;
 
 public class ClimbingMech extends Subsystem {
 
+  VictorSPX armMotor = RobotMap.climbingArmTalon;
+  VictorSPX winchMotor = RobotMap.winchTalon;
 
   public ClimbingMech() {
   }
 
   public void extendClimbingArm(){
-    RobotMap.climbingArmMotor.set(ControlMode.PercentOutput, 0.75);
+    armMotor.set(ControlMode.PercentOutput, 0.5);
   }
 
   public void retractClimbingArm(){
-    RobotMap.climbingArmMotor.set(ControlMode.PercentOutput, 0.5);
+    armMotor.set(ControlMode.PercentOutput, -0.15);
+  }
+
+  public void stopClimbingArm(){
+    armMotor.set(ControlMode.PercentOutput, 0);
   }
 
   public void winchUp(){
 
-    RobotMap.winchMotor1.set(ControlMode.PercentOutput, 0.80);
-    RobotMap.winchMotor2.set(ControlMode.PercentOutput, 0.80); // This is the reversed motor
+    winchMotor.set(ControlMode.PercentOutput, 1);
 
   }
 
   public void winchDown(){
 
-    RobotMap.winchMotor1.set(ControlMode.PercentOutput, -0.60);
-    RobotMap.winchMotor2.set(ControlMode.PercentOutput, -0.60); // This is the reversed motor
+    //winchMotor.set(ControlMode.PercentOutput, -0.60);
+
+  }
+
+  public void winchStop(){
+
+    winchMotor.set(ControlMode.PercentOutput, 0);
 
   }
 

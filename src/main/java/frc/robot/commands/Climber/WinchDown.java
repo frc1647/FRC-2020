@@ -5,22 +5,20 @@
 /* the project.                                                               */
 /*----------------------------------------------------------------------------*/
 
-package frc.robot.commands.Shooter;
+package frc.robot.commands.Climber;
 
 import edu.wpi.first.wpilibj.command.Command;
-import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import frc.robot.Robot;
-import frc.robot.RobotMap;
-import frc.robot.subsystems.BallFeeder;
+import frc.robot.subsystems.ClimbingMech;
 
-public class FeedShooter extends Command {
-  
-  BallFeeder feeder = Robot.feeder;
-  
-  public FeedShooter() {
+public class WinchDown extends Command {
+
+  ClimbingMech winch = Robot.climbingMech;
+
+  public WinchDown() {
     // Use requires() here to declare subsystem dependencies
     // eg. requires(chassis);
-    requires(Robot.feeder);
+    requires(Robot.climbingMech);
   }
 
   // Called just before this Command runs the first time
@@ -31,7 +29,7 @@ public class FeedShooter extends Command {
   // Called repeatedly when this Command is scheduled to run
   @Override
   protected void execute() {
-    feeder.raise();    
+    winch.winchDown();
   }
 
   // Make this return true when this Command no longer needs to run execute()
@@ -43,13 +41,13 @@ public class FeedShooter extends Command {
   // Called once after isFinished returns true
   @Override
   protected void end() {
-    feeder.lower();
+    winch.winchStop();
   }
 
   // Called when another command which requires one or more of the same
   // subsystems is scheduled to run
   @Override
   protected void interrupted() {
-    feeder.lower();
+    winch.winchStop();
   }
 }

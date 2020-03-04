@@ -9,8 +9,11 @@ package frc.robot.commands.Climber;
 
 import edu.wpi.first.wpilibj.command.Command;
 import frc.robot.Robot;
+import frc.robot.subsystems.ClimbingMech;
 
 public class ClimbArmDown extends Command {
+
+  ClimbingMech arm = Robot.climbingMech;
   
   public ClimbArmDown() {
 
@@ -24,9 +27,7 @@ public class ClimbArmDown extends Command {
 
   @Override
   protected void execute() {
-
-    Robot.climbingMech.retractClimbingArm();
-
+    arm.retractClimbingArm();
   }
 
   @Override
@@ -36,9 +37,11 @@ public class ClimbArmDown extends Command {
 
   @Override
   protected void end() {
+    arm.stopClimbingArm();
   }
 
   @Override
   protected void interrupted() {
+    arm.stopClimbingArm();
   }
 }
