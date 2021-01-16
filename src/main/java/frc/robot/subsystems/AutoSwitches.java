@@ -21,6 +21,9 @@ public class AutoSwitches extends Subsystem {
 
   public void switches() {
     
+  }
+
+  public int getAutoSwitches(){
     if (switch1==false && switch2==false && switch3==false && switch4==false){ //Case 1 - Off, Off, Off, Off
       AutoCase = 1;
     }
@@ -89,9 +92,7 @@ public class AutoSwitches extends Subsystem {
     else{
       AutoCase = 13; //Defualt Case
     }
-  }
-
-  public int getAutoSwitches(){
+    
     return AutoCase;
   }
 

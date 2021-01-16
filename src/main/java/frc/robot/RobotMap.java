@@ -16,6 +16,10 @@ import edu.wpi.first.wpilibj.Encoder;
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.SPI;
 import edu.wpi.first.wpilibj.Solenoid;
+import io.github.pseudoresonance.pixy2api.Pixy2;
+import io.github.pseudoresonance.pixy2api.links.Link;
+import io.github.pseudoresonance.pixy2api.links.SPILink;
+import edu.wpi.first.wpilibj.XboxController;
 //import edu.wpi.first.wpilibj.Solenoid;
 /**
  * The RobotMap is a mapping from the ports sensors and actuators are wired into
@@ -38,18 +42,17 @@ public class RobotMap {
   //Motor Controllers
   public static WPI_TalonSRX flyWheelTalon = new WPI_TalonSRX(4); // FOR TESTING
   public static WPI_TalonSRX intakeTalon = new WPI_TalonSRX(5);
-  public static WPI_TalonSRX conveyorTalon = new WPI_TalonSRX(60);
-  public static WPI_TalonSRX winchMotor1 = new WPI_TalonSRX(60);
-  public static WPI_TalonSRX winchMotor2 = new WPI_TalonSRX(60); // This one is the inverted one
-  public static VictorSPX climbingArmMotor = new VictorSPX(60); 
+  public static VictorSPX winchTalon = new VictorSPX(5);
+  public static VictorSPX climbingArmTalon = new VictorSPX(2); 
 
-  public static WPI_TalonSRX testTalon1 = new WPI_TalonSRX(60);
-  public static WPI_TalonSRX testTalon2 = new WPI_TalonSRX(60);
+  //public static WPI_TalonSRX testTalon1 = new WPI_TalonSRX(60);
+  //public static WPI_TalonSRX testTalon2 = new WPI_TalonSRX(60);
 
   //Joysticks
   public static Joystick leftJoy = new Joystick(1);
   public static Joystick rightJoy = new Joystick(2);
   public static Joystick tablet = new Joystick(0);
+  //public static XboxController xbox = new XboxController(0);
 
   // Others
   public static Encoder driveEncoder = new Encoder(8 , 9);
@@ -61,4 +64,7 @@ public class RobotMap {
   public static DigitalInput switch2 = new DigitalInput(1);
   public static DigitalInput switch3 = new DigitalInput(2);
   public static DigitalInput switch4 = new DigitalInput(3);
+
+  //Pixy Cam
+  public static Pixy2 pixy = Pixy2.createInstance(new SPILink());
 }

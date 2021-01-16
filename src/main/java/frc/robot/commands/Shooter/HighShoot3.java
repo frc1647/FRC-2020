@@ -20,7 +20,7 @@ public class HighShoot3 extends CommandGroup {
     // e.g. addSequential(new Command1());
     // addSequential(new Command2());
     // these will run in order.
-    addSequential(new HighGoalShoot());
+    addSequential(new shootHighFromAnywhere());
     addParallel(new LoadCells());
     try {
       Thread.sleep(1500, 0);

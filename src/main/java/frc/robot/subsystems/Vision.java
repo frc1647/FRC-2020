@@ -91,4 +91,12 @@ public class Vision extends Subsystem {
   public double getCamAngle(){
     return camAngle;
   }
+
+  public void lightsOn(){
+    table.getEntry("ledMode").setNumber(3);
+  }
+
+  public void lightsOff(){
+    table.getEntry("ledMode").setNumber(1);
+  }
 }

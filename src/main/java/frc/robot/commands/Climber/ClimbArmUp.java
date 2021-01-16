@@ -1,3 +1,4 @@
+
 /*----------------------------------------------------------------------------*/
 /* Copyright (c) 2018 FIRST. All Rights Reserved.                             */
 /* Open Source Software - may be modified and shared by FRC teams. The code   */
@@ -9,8 +10,11 @@ package frc.robot.commands.Climber;
 
 import edu.wpi.first.wpilibj.command.Command;
 import frc.robot.Robot;
+import frc.robot.subsystems.ClimbingMech;
 
 public class ClimbArmUp extends Command {
+
+  ClimbingMech arm = Robot.climbingMech;
   
   public ClimbArmUp() {
 
@@ -25,7 +29,7 @@ public class ClimbArmUp extends Command {
   @Override
   protected void execute() {
 
-    Robot.climbingMech.extendClimbingArm();
+    arm.extendClimbingArm();
 
   }
 
@@ -36,9 +40,11 @@ public class ClimbArmUp extends Command {
 
   @Override
   protected void end() {
+    arm.stopClimbingArm();
   }
 
   @Override
   protected void interrupted() {
+    arm.stopClimbingArm();
   }
 }

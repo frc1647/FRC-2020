@@ -141,7 +141,7 @@ public class SwerveDrivetrain extends Subsystem {
   }
 
   public double getGyro(){
-    return gyro.getAngle();
+    return gyro.getAngle(); //%360;
   }
 
   public void move(double fwd, double str, double rcw){

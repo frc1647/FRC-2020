@@ -37,14 +37,6 @@ public class SnapToAngle extends Command {
   @Override
   protected void initialize() {
   }
-  
-  /*//Calculates the PID for turning to an angle
-  public void PID(){
-    this.integral += (error * .02); 
-    derivative = (error - this.previousError) / .02;
-    this.target = P*error + I*this.integral + D*derivative;
-    previousError = error;
-  }*/
 
   // Called repeatedly when this Command is scheduled to run
   @Override
@@ -107,7 +99,7 @@ public class SnapToAngle extends Command {
     }
 
     Robot.drivetrain.move(0.0, 0.0, steeringAdjust);
-    }
+  }
 
   double approxAngle(double raw){
     double ang = 0;

@@ -8,7 +8,6 @@
 package frc.robot.commands.AutoCases;
 
 import edu.wpi.first.wpilibj.command.CommandGroup;
-import frc.robot.commands.Movement.DriveDistance;
 
 public class case13 extends CommandGroup {
   /**
@@ -19,7 +18,6 @@ public class case13 extends CommandGroup {
     // e.g. addSequential(new Command1());
     // addSequential(new Command2());
     // these will run in order.
-    addSequential(new DriveDistance(25));
 
     // To run multiple commands at the same time,
     // use addParallel()

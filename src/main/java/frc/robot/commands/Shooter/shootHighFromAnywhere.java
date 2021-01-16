@@ -19,13 +19,15 @@ public class shootHighFromAnywhere extends Command {
   FlyWheel flywheel = Robot.flywheel;
 
   //inches and degrees
-  double goalHeight = vision.getGoalHeight();
   double camHeight = vision.getCamHeight();
-  double initialHeight = 18;
+  double initialHeight = 14.25;
+  double goalHeight = vision.getGoalHeight() - initialHeight;
   double v1;
-  double hoodAngle = 30;
+  double hoodAngle = 38;
   double g = 32.2*12; //gravity (in/s^2)
-  double maxV1 = 100; // Maximum initial velocity
+  double maxDistance = 424; //381
+  double maxV1 = Math.sqrt(Math.abs((g * Math.pow(maxDistance, 2))/
+  (2 * (0 - initialHeight - maxDistance * Math.tan(Math.toRadians(hoodAngle))) * Math.pow(Math.cos(hoodAngle), 2)))); // Maximum initial velocity
 
   public shootHighFromAnywhere() {
     // Use requires() here to declare subsystem dependencies
@@ -67,7 +69,9 @@ public class shootHighFromAnywhere extends Command {
   //Calculates initial velocity of the ball based on distance from the goal
   private double getV1(){
     double v;
-    v = Math.sqrt((vision.getDistance()*Math.tan(Math.toRadians(hoodAngle))-g*Math.pow(vision.getDistance(), 2)) / (2*(goalHeight-initialHeight)*Math.pow(Math.cos(Math.toRadians(hoodAngle)), 2)));
+    //v = Math.sqrt((vision.getDistance()*Math.tan(Math.toRadians(hoodAngle))-g*Math.pow(vision.getDistance(), 2)) / (2*(goalHeight-initialHeight)*Math.pow(Math.cos(Math.toRadians(hoodAngle)), 2)));
+    v = Math.sqrt(Math.abs((g * Math.pow(vision.getDistance(), 2))/
+    (2 * (goalHeight - initialHeight - vision.getDistance() * Math.tan(Math.toRadians(hoodAngle))) * Math.pow(Math.cos(hoodAngle), 2))));
     return v;
   }
 }

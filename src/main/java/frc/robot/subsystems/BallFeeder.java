@@ -21,11 +21,11 @@ public class BallFeeder extends Subsystem {
   private final Solenoid liftPistons = RobotMap.feederSolenoid;
   
   public void raise(){
-    liftPistons.set(false);
+    liftPistons.set(true);
   }
 
   public void lower(){
-    liftPistons.set(true);
+    liftPistons.set(false);
   }
 
   @Override
