@@ -30,18 +30,18 @@ import edu.wpi.first.wpilibj.XboxController;
 public class RobotMap {
 
   // Swerve Motor Controllers 
-  public static VictorSPX FRTalonD = new VictorSPX(10);
+  public static VictorSPX FRTalonD = new VictorSPX(8);
   public static WPI_TalonSRX FRTalonS = new WPI_TalonSRX(2);
   public static WPI_TalonSRX FLTalonD = new WPI_TalonSRX(7);
   public static WPI_TalonSRX FLTalonS = new WPI_TalonSRX(3);
-  public static VictorSPX RRTalonD = new VictorSPX(8);
+  public static WPI_TalonSRX RRTalonD = new WPI_TalonSRX(5);
   public static WPI_TalonSRX RRTalonS = new WPI_TalonSRX(6);
   public static VictorSPX RLTalonD = new VictorSPX(9);
   public static WPI_TalonSRX RLTalonS = new WPI_TalonSRX(1);
 
   //Motor Controllers
   public static WPI_TalonSRX flyWheelTalon = new WPI_TalonSRX(4); // FOR TESTING
-  public static WPI_TalonSRX intakeTalon = new WPI_TalonSRX(5);
+  public static WPI_TalonSRX intakeTalon = new WPI_TalonSRX(8);
   public static VictorSPX winchTalon = new VictorSPX(5);
   public static VictorSPX climbingArmTalon = new VictorSPX(2); 
 
